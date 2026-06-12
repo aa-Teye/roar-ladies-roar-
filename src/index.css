@@ -48,6 +48,7 @@
     line-height: 1.65;
     color: var(--ink);
     background: var(--paper);
+    padding-bottom: 50px;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -516,7 +517,7 @@
   /* ---------- floating whatsapp bubble ---------- */
   .whatsapp-bubble {
     position: fixed;
-    bottom: 24px;
+    bottom: 78px;
     right: 24px;
     background-color: #25D366;
     width: 58px;
@@ -591,5 +592,24 @@
   .carousel-dot.active {
     background: var(--pink);
     transform: scale(1.2);
+  }
+
+  /* ---------- global news ticker bar ---------- */
+  .news-ticker-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--plum);
+    color: #fff;
+    z-index: 900;
+    padding: 12px 0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-top: 2px solid var(--pink);
+    overflow: hidden;
+    box-shadow: 0 -4px 18px rgba(67, 9, 58, 0.22);
   }
 }

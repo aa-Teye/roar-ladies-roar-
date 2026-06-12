@@ -123,6 +123,39 @@ function WhatsAppBubble() {
   )
 }
 
+/* ---------- News Ticker Bar (Newsroom-style) ---------- */
+function NewsTickerBar() {
+  const headlines = [
+    "Welcome to Roar Ladies Roar Ministry — Ladies on Fire for Christ!",
+    "Midweek Prayer & Word: Tuesdays at 9:00 PM GMT online",
+    "Fellowship & Encouragement: Thursdays at 9:00 PM GMT online",
+    "Worship & Teaching: Sundays at 9:00 PM GMT online",
+    "Encounter 2026 Conference: Registration is now open! Stand in prayer with over 150 sisters.",
+    "Submit your prayer requests or stand in prayer with others on our new interactive Prayer Wall!",
+    "Partner with us: Sow a seed on our Give page to support global outreach and leadership training."
+  ]
+
+  return (
+    <div className="news-ticker-bar">
+      <div className="strip-track" style={{ animationDuration: '55s' }}>
+        {headlines.map((headline, i) => (
+          <span key={i} style={{ fontStyle: 'normal', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+            {headline}
+            <i className="not-italic text-[13px] ml-[34px]" style={{ color: 'var(--rose)' }}>✦</i>
+          </span>
+        ))}
+        {/* Duplicate for infinite loop */}
+        {headlines.map((headline, i) => (
+          <span key={`dup-${i}`} style={{ fontStyle: 'normal', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+            {headline}
+            <i className="not-italic text-[13px] ml-[34px]" style={{ color: 'var(--rose)' }}>✦</i>
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function AppContent() {
   const location = useLocation()
 
@@ -143,6 +176,7 @@ function AppContent() {
       </div>
       <Footer />
       <WhatsAppBubble />
+      <NewsTickerBar />
     </>
   )
 }

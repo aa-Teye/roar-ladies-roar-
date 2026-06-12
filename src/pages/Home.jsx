@@ -20,23 +20,6 @@ const testimonies = [
   }
 ]
 
-/* ---------- Marquee Strip ---------- */
-function MarqueeStrip() {
-  const words = ['Prayer', 'Fellowship', 'Empowerment', 'Worship', 'Purpose']
-  return (
-    <div className="overflow-hidden py-[18px]" style={{ background: 'var(--plum)', color: '#fff' }}>
-      <div className="strip-track">
-        {[...words, ...words].map((w, i) => (
-          <span key={i}>
-            {w}
-            {i < words.length * 2 - 1 && <i className="not-italic text-[14px] ml-[34px]" style={{ color: 'var(--rose)' }}>✦</i>}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 /* ---------- Pillar Card ---------- */
 function PillarCard({ num, title, desc, delay = '' }) {
   return (
@@ -130,8 +113,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== MARQUEE ===== */}
-      <MarqueeStrip />
 
       {/* ===== WELCOME ===== */}
       <section className="section-rlr">
