@@ -121,8 +121,8 @@ export default function Connect() {
   return (
     <>
       {/* Page hero */}
-      <section className="section-rlr" style={{ background: 'var(--blush)', paddingBottom: 0 }}>
-        <div className="container-rlr" style={{ maxWidth: '760px', paddingBottom: 'clamp(48px,6vw,80px)' }}>
+      <section className="section-rlr" style={{ background: 'var(--blush)', paddingBottom: 'clamp(48px,6vw,80px)' }}>
+        <div className="container-rlr" style={{ maxWidth: '760px' }}>
           <span className="eyebrow reveal">Connect</span>
           <h1
             className="display-text mt-5 reveal d1"
@@ -135,9 +135,6 @@ export default function Connect() {
             Our online meetings are free, open to all women, and full of the presence of God. Find a time that works for you and show up — you will not be the same.
           </p>
         </div>
-
-        {/* ===== NEWS TICKER PLACEHOLDER ===== */}
-        <div id="hero-crawler-placeholder" className="h-[46px]"></div>
       </section>
 
       {/* Meeting schedule */}

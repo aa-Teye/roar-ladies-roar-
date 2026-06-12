@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useReveal from '../hooks/useReveal'
+import NewsTickerBar from '../components/NewsTickerBar'
 
 const testimonies = [
   {
@@ -112,8 +113,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ===== NEWS TICKER PLACEHOLDER ===== */}
-        <div id="hero-crawler-placeholder" className="h-[46px]"></div>
+        {/* ===== NEWS TICKER ===== */}
+        <NewsTickerBar isInline={true} />
       </section>
 
       {/* ===== WELCOME ===== */}

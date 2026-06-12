@@ -46,9 +46,9 @@ export default function Conference() {
       {/* Hero */}
       <section
         className="section-rlr"
-        style={{ background: 'var(--plum)', color: '#F7E9F2', paddingBottom: 0 }}
+        style={{ background: 'var(--plum)', color: '#F7E9F2', paddingBottom: 'clamp(48px,6vw,90px)' }}
       >
-        <div className="container-rlr" style={{ maxWidth: '860px', paddingBottom: 'clamp(48px,6vw,90px)' }}>
+        <div className="container-rlr" style={{ maxWidth: '860px' }}>
           <span className="eyebrow eyebrow-rose reveal">The Annual Encounter Conference</span>
           <h1
             className="display-text text-white mt-5 reveal d1"
@@ -82,9 +82,6 @@ export default function Conference() {
             <Link to="/connect" className="btn btn-ghost-light">Get more info</Link>
           </div>
         </div>
-
-        {/* ===== NEWS TICKER PLACEHOLDER ===== */}
-        <div id="hero-crawler-placeholder" className="h-[46px]"></div>
       </section>
 
       {/* What to expect */}

@@ -14,8 +14,8 @@ export default function About() {
   return (
     <>
       {/* Page hero */}
-      <section className="section-rlr" style={{ background: 'var(--blush)', paddingBottom: 0 }}>
-        <div className="container-rlr" style={{ maxWidth: '800px', paddingBottom: 'clamp(48px,6vw,90px)' }}>
+      <section className="section-rlr" style={{ background: 'var(--blush)', paddingBottom: 'clamp(48px,6vw,90px)' }}>
+        <div className="container-rlr" style={{ maxWidth: '800px' }}>
           <span className="eyebrow reveal">About Us</span>
           <h1
             className="display-text mt-5 reveal d1"
@@ -28,9 +28,6 @@ export default function About() {
             Roar Ladies Roar Ministry is a global community of prayerful, passionate and purpose-driven women — growing deeper in God, discovering our purpose, and transforming our world through His love.
           </p>
         </div>
-
-        {/* ===== NEWS TICKER PLACEHOLDER ===== */}
-        <div id="hero-crawler-placeholder" className="h-[46px]"></div>
       </section>
 
       {/* Mission & Vision */}
