@@ -66,7 +66,7 @@ export default function Home() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="section-rlr" style={{ paddingTop: 'clamp(40px,5vw,72px)', paddingBottom: 0 }}>
+      <section className="section-rlr" style={{ paddingTop: 'clamp(40px,5vw,72px)', paddingBottom: 0, paddingBlockEnd: 0 }}>
         <div
           className="container-rlr grid gap-[clamp(36px,5vw,80px)] items-center"
           style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,420px),1fr))', paddingBottom: 'clamp(48px,6vw,90px)' }}
