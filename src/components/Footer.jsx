@@ -9,7 +9,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'var(--plum)', color: '#E7CFDE', paddingTop: 'clamp(60px,7vw,96px)' }}>
+    <footer style={{ background: 'var(--plum)', color: '#E7CFDE', paddingTop: 'clamp(60px,7vw,96px)', marginTop: '46px' }}>
       <div className="container-rlr">
         <div
           className="grid gap-10 pb-14"

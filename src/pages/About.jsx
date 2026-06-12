@@ -30,6 +30,9 @@ export default function About() {
         </div>
       </section>
 
+      {/* ===== NEWS TICKER PLACEHOLDER ===== */}
+      <div id="hero-crawler-placeholder" className="h-[46px]"></div>
+
       {/* Mission & Vision */}
       <section className="section-rlr">
         <div

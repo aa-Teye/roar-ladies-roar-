@@ -113,6 +113,8 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== NEWS TICKER PLACEHOLDER ===== */}
+      <div id="hero-crawler-placeholder" className="h-[46px]"></div>
 
       {/* ===== WELCOME ===== */}
       <section className="section-rlr">

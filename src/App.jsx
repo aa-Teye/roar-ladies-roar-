@@ -125,6 +125,16 @@ function WhatsAppBubble() {
 
 /* ---------- News Ticker Bar (Newsroom-style) ---------- */
 function NewsTickerBar() {
+  const location = useLocation()
+  const [style, setStyle] = useState({
+    position: 'absolute',
+    top: '0px',
+    left: 0,
+    right: 0,
+    zIndex: 900,
+    visibility: 'hidden'
+  })
+
   const headlines = [
     "Welcome to Roar Ladies Roar Ministry — Ladies on Fire for Christ!",
     "Midweek Prayer & Word: Tuesdays at 9:00 PM GMT online",
@@ -135,8 +145,80 @@ function NewsTickerBar() {
     "Partner with us: Sow a seed on our Give page to support global outreach and leadership training."
   ]
 
+  useEffect(() => {
+    const handleScrollAndResize = () => {
+      const placeholder = document.getElementById('hero-crawler-placeholder')
+      const footer = document.querySelector('footer')
+      
+      if (!placeholder) {
+        setStyle({
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 900
+        })
+        return
+      }
+
+      const scrollY = window.scrollY
+      const viewportHeight = window.innerHeight
+      const viewportBottom = scrollY + viewportHeight
+
+      const placeholderRect = placeholder.getBoundingClientRect()
+      const placeholderY = placeholderRect.top + scrollY
+      const placeholderHeight = placeholderRect.height || 46
+
+      let footerY = document.documentElement.scrollHeight
+      if (footer) {
+        const footerRect = footer.getBoundingClientRect()
+        footerY = footerRect.top + scrollY
+      }
+
+      const isSmallViewport = viewportHeight < placeholderY + placeholderHeight
+      const shouldStick = viewportBottom >= placeholderY + placeholderHeight && (isSmallViewport || scrollY >= placeholderY - 78)
+
+      if (viewportBottom >= footerY) {
+        setStyle({
+          position: 'absolute',
+          top: `${footerY - placeholderHeight}px`,
+          left: 0,
+          right: 0,
+          zIndex: 900
+        })
+      } else if (shouldStick) {
+        setStyle({
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 900
+        })
+      } else {
+        setStyle({
+          position: 'absolute',
+          top: `${placeholderY}px`,
+          left: 0,
+          right: 0,
+          zIndex: 900
+        })
+      }
+    }
+
+    const timer = setTimeout(handleScrollAndResize, 100)
+
+    window.addEventListener('scroll', handleScrollAndResize, { passive: true })
+    window.addEventListener('resize', handleScrollAndResize, { passive: true })
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('scroll', handleScrollAndResize)
+      window.removeEventListener('resize', handleScrollAndResize)
+    }
+  }, [location.pathname])
+
   return (
-    <div className="news-ticker-bar">
+    <div className="news-ticker-bar" style={style}>
       <div className="strip-track" style={{ animationDuration: '55s' }}>
         {headlines.map((headline, i) => (
           <span key={i} style={{ fontStyle: 'normal', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>

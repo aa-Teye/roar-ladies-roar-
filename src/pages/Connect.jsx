@@ -137,6 +137,9 @@ export default function Connect() {
         </div>
       </section>
 
+      {/* ===== NEWS TICKER PLACEHOLDER ===== */}
+      <div id="hero-crawler-placeholder" className="h-[46px]"></div>
+
       {/* Meeting schedule */}
       <section className="section-rlr">
         <div className="container-rlr">

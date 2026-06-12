@@ -84,6 +84,9 @@ export default function Conference() {
         </div>
       </section>
 
+      {/* ===== NEWS TICKER PLACEHOLDER ===== */}
+      <div id="hero-crawler-placeholder" className="h-[46px]"></div>
+
       {/* What to expect */}
       <section className="section-rlr">
         <div className="container-rlr">

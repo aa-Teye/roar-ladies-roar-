@@ -61,6 +61,9 @@ export default function Give() {
         </div>
       </section>
 
+      {/* ===== NEWS TICKER PLACEHOLDER ===== */}
+      <div id="hero-crawler-placeholder" className="h-[46px]"></div>
+
       {/* Why give */}
       <section className="section-rlr">
         <div className="container-rlr">
