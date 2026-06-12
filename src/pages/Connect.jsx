@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useReveal from '../hooks/useReveal'
 
 const meetings = [
@@ -8,12 +8,12 @@ const meetings = [
 ]
 
 const galleryItems = [
-  { label: 'worship night' },
-  { label: 'women praying' },
-  { label: 'conference stage' },
-  { label: 'fellowship' },
-  { label: 'prayer circle' },
-  { label: 'community gathering' },
+  { src: '/gallery-worship-night.JPEG', alt: 'Worship night' },
+  { src: '/gallery-worship2.JPEG', alt: 'Women praying' },
+  { src: '/gallery-conference-stage.JPEG', alt: 'Conference stage' },
+  { src: '/gallery-fellowship.JPEG', alt: 'Fellowship' },
+  { src: '/gallery-prayer-circle.JPEG', alt: 'Prayer circle' },
+  { src: '/prayer-circle2.JPEG', alt: 'Community gathering' },
 ]
 
 export default function Connect() {
@@ -24,6 +24,98 @@ export default function Connect() {
   const handleSubmit = (e) => {
     e.preventDefault()
     setSubmitted(true)
+  }
+
+  // Prayer Wall States & Logic
+  const [prayers, setPrayers] = useState(() => {
+    const saved = localStorage.getItem('rlr_prayers')
+    if (saved) {
+      try { return JSON.parse(saved) } catch (e) { }
+    }
+    return [
+      {
+        id: 'p1',
+        name: 'Rebecca A.',
+        category: 'Family',
+        text: 'Praying for healing and restoration in my family, especially for my mother who is undergoing surgery next week. I stand on the promise of Jehovah Rapha.',
+        count: 24,
+        time: '3 hours ago'
+      },
+      {
+        id: 'p2',
+        name: 'Dora M.',
+        category: 'Faith & Growth',
+        text: 'Asking for prayer to rekindle my spiritual fire. I want to grow deeper in intercession and be consistent in my quiet times with God.',
+        count: 18,
+        time: '6 hours ago'
+      },
+      {
+        id: 'p3',
+        name: 'Anonymous',
+        category: 'Career & Purpose',
+        text: 'I am trusting God for a career breakthrough and direction. I completed my degree but have been waiting for a door to open. Praying for clarity of purpose.',
+        count: 31,
+        time: '1 day ago'
+      }
+    ]
+  })
+
+  const [prayerForm, setPrayerForm] = useState({ name: '', category: 'General', text: '' })
+  const [prayerSubmitted, setPrayerSubmitted] = useState(false)
+  const [filter, setFilter] = useState('All')
+
+  useEffect(() => {
+    localStorage.setItem('rlr_prayers', JSON.stringify(prayers))
+  }, [prayers])
+
+  const handlePrayerSubmit = (e) => {
+    e.preventDefault()
+    if (!prayerForm.text.trim()) return
+    const newPrayer = {
+      id: 'p_' + Date.now(),
+      name: prayerForm.name.trim() || 'Anonymous',
+      category: prayerForm.category,
+      text: prayerForm.text.trim(),
+      count: 1,
+      time: 'Just now'
+    }
+    setPrayers([newPrayer, ...prayers])
+    setPrayerForm({ name: '', category: 'General', text: '' })
+    setPrayerSubmitted(true)
+    setTimeout(() => setPrayerSubmitted(false), 3000)
+  }
+
+  // Storing which prayers the current user has stood in prayer for
+  const [myPrayed, setMyPrayed] = useState(() => {
+    const saved = localStorage.getItem('rlr_my_prayed')
+    return saved ? JSON.parse(saved) : {}
+  })
+
+  useEffect(() => {
+    localStorage.setItem('rlr_my_prayed', JSON.stringify(myPrayed))
+  }, [myPrayed])
+
+  // Flying hearts state
+  const [flyingHearts, setFlyingHearts] = useState([])
+
+  const handlePrayClick = (e, id) => {
+    setPrayers(prev => prev.map(p => p.id === id ? { ...p, count: p.count + 1 } : p))
+    setMyPrayed(prev => ({ ...prev, [id]: true }))
+
+    const rect = e.currentTarget.getBoundingClientRect()
+    const heartId = 'h_' + Date.now() + Math.random()
+    const xOffset = Math.random() * 40 - 20
+    const newHeart = {
+      id: heartId,
+      left: e.clientX - rect.left + 'px',
+      top: e.clientY - rect.top + 'px',
+      xOffset: xOffset + 'px'
+    }
+    setFlyingHearts(prev => [...prev, newHeart])
+    
+    setTimeout(() => {
+      setFlyingHearts(prev => prev.filter(h => h.id !== heartId))
+    }, 1200)
   }
 
   return (
@@ -213,6 +305,184 @@ export default function Connect() {
         </div>
       </section>
 
+      {/* Prayer Wall */}
+      <section className="section-rlr" id="prayer-wall" style={{ borderTop: '1px solid var(--line)', background: 'var(--paper)' }}>
+        <div className="container-rlr">
+          <div className="max-w-[760px] mb-12 reveal">
+            <span className="eyebrow">RLR Prayer Wall</span>
+            <h2 className="section-head-h2">Stand in prayer with your sisters</h2>
+            <p className="lead-text mt-4">
+              "For where two or three gather in my name, there am I with them." — Matthew 18:20. Submit your request or lift up a sister in prayer today.
+            </p>
+          </div>
+
+          <div
+            className="grid gap-[clamp(34px,5vw,72px)] items-start"
+            style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,320px),1fr))' }}
+          >
+            {/* Submit Form */}
+            <div className="card-rlr reveal" style={{ position: 'sticky', top: '100px' }}>
+              <h3 style={{ fontFamily: 'var(--serif)', fontSize: 'var(--t-h3)', marginTop: 0 }}>Submit Request</h3>
+              <p className="mb-6 mt-2 text-[14px]" style={{ color: 'var(--muted)' }}>
+                Your request will be posted on the wall. You can post anonymously.
+              </p>
+
+              {prayerSubmitted ? (
+                <div className="py-8 text-center bg-[color:var(--blush)] rounded-[14px] border border-[color:var(--line)]">
+                  <p className="text-[20px] font-bold" style={{ color: 'var(--pink)' }}>Request Posted! 🙏</p>
+                  <p className="text-[14px] mt-2 text-gray-600">Sisters are standing in prayer with you.</p>
+                </div>
+              ) : (
+                <form onSubmit={handlePrayerSubmit} className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="p-name" className="text-[12px] font-bold uppercase tracking-wider" style={{ color: 'var(--ink)' }}>Name (Optional)</label>
+                    <input
+                      id="p-name"
+                      type="text"
+                      placeholder="e.g. Grace or Leave blank for Anonymous"
+                      value={prayerForm.name}
+                      onChange={(e) => setPrayerForm(f => ({ ...f, name: e.target.value }))}
+                      className="w-full px-4 py-3 rounded-[11px] outline-none"
+                      style={{ border: '1.5px solid var(--line)', background: '#fff', fontSize: '15px' }}
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="p-cat" className="text-[12px] font-bold uppercase tracking-wider" style={{ color: 'var(--ink)' }}>Category</label>
+                    <select
+                      id="p-cat"
+                      value={prayerForm.category}
+                      onChange={(e) => setPrayerForm(f => ({ ...f, category: e.target.value }))}
+                      className="w-full px-4 py-3 rounded-[11px] outline-none"
+                      style={{ border: '1.5px solid var(--line)', background: '#fff', fontSize: '15px' }}
+                    >
+                      {['General', 'Family', 'Healing & Health', 'Career & Purpose', 'Faith & Growth', 'Marriage & Relationships'].map(cat => (
+                        <option key={cat} value={cat}>{cat}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="p-text" className="text-[12px] font-bold uppercase tracking-wider" style={{ color: 'var(--ink)' }}>Prayer Request</label>
+                    <textarea
+                      id="p-text"
+                      rows={4}
+                      required
+                      placeholder="What are you trusting God for?"
+                      value={prayerForm.text}
+                      onChange={(e) => setPrayerForm(f => ({ ...f, text: e.target.value }))}
+                      className="w-full px-4 py-3 rounded-[11px] outline-none resize-none"
+                      style={{ border: '1.5px solid var(--line)', background: '#fff', fontSize: '15px' }}
+                    />
+                  </div>
+
+                  <button type="submit" className="btn btn-primary mt-2 justify-center w-full">
+                    Post Prayer Request
+                  </button>
+                </form>
+              )}
+            </div>
+
+            {/* Prayer Feed */}
+            <div className="flex flex-col gap-6 reveal d1">
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap gap-2 mb-2">
+                {['All', 'General', 'Family', 'Healing & Health', 'Career & Purpose', 'Faith & Growth'].map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => setFilter(cat)}
+                    className="pill cursor-pointer"
+                    style={{
+                      background: filter === cat ? 'var(--pink)' : 'var(--blush)',
+                      color: filter === cat ? '#fff' : 'var(--magenta)',
+                      border: 'none',
+                      padding: '6px 14px',
+                      fontSize: '12.5px'
+                    }}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-5">
+                {prayers
+                  .filter(p => filter === 'All' || p.category === filter || (filter === 'Healing & Health' && p.category === 'Healing') || (filter === 'Faith & Growth' && p.category === 'Faith & Growth'))
+                  .map(p => (
+                    <div
+                      key={p.id}
+                      className="card-rlr"
+                      style={{ 
+                        background: '#fff', 
+                        padding: '28px', 
+                        position: 'relative',
+                        overflow: 'hidden',
+                        borderColor: myPrayed[p.id] ? 'var(--pink)' : 'var(--line)'
+                      }}
+                    >
+                      <div className="flex justify-between items-start gap-4 flex-wrap mb-4">
+                        <div className="flex items-center gap-2">
+                          <span className="font-serif font-bold text-[18px]" style={{ color: 'var(--ink)' }}>
+                            {p.name}
+                          </span>
+                          <span className="text-[13px]" style={{ color: 'var(--muted)' }}>
+                            • {p.time}
+                          </span>
+                        </div>
+                        <span 
+                          className="pill text-[11px]" 
+                          style={{ background: 'var(--blush)', color: 'var(--magenta)', padding: '4px 10px' }}
+                        >
+                          {p.category}
+                        </span>
+                      </div>
+                      
+                      <p style={{ color: 'var(--muted)', fontSize: '16px', lineHeight: '1.65', marginBottom: '20px' }}>
+                        {p.text}
+                      </p>
+
+                      <div className="flex items-center justify-between border-t pt-4" style={{ borderColor: 'var(--line)' }}>
+                        <span className="text-[13px] font-semibold" style={{ color: 'var(--muted)' }}>
+                          🙏 {p.count} sisters prayed
+                        </span>
+                        
+                        <button
+                          onClick={(e) => handlePrayClick(e, p.id)}
+                          className="btn btn-ghost btn-sm"
+                          style={{
+                            borderColor: myPrayed[p.id] ? 'var(--pink)' : 'var(--line)',
+                            color: myPrayed[p.id] ? 'var(--pink)' : 'var(--ink)',
+                            padding: '8px 18px',
+                            background: myPrayed[p.id] ? 'var(--blush)' : 'transparent',
+                            position: 'relative'
+                          }}
+                        >
+                          {myPrayed[p.id] ? '❤️ Stood in Prayer' : '🙏 Stand in Prayer'}
+                          
+                          {/* Floating hearts */}
+                          {flyingHearts.map(heart => (
+                            <span
+                              key={heart.id}
+                              className="floating-heart"
+                              style={{
+                                left: heart.left,
+                                top: heart.top,
+                                '--x-offset': heart.xOffset
+                              }}
+                            >
+                              ❤️
+                            </span>
+                          ))}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Gallery */}
       <section className="section-rlr" id="gallery">
         <div className="container-rlr">
@@ -226,11 +496,12 @@ export default function Connect() {
             className="grid gap-4 reveal d1"
             style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(180px,1fr))' }}
           >
-            {galleryItems.map(({ label }, i) => (
-              <div
+            {galleryItems.map(({ src, alt }, i) => (
+              <img
                 key={i}
-                className="ph-placeholder"
-                data-label={label}
+                src={src}
+                alt={alt}
+                className="w-full object-cover rounded-[14px]"
                 style={{ aspectRatio: '1/1' }}
               />
             ))}

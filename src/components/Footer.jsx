@@ -18,12 +18,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-3" aria-label="Home">
-              <span
-                className="logo-mark"
-                style={{ boxShadow: 'none' }}
-              >
-                RLR
-              </span>
+              <img
+                src="/logo.jpeg"
+                alt="RLR Logo"
+                className="w-11 h-11 rounded-[13px] object-cover flex-none"
+              />
               <span className="flex flex-col leading-tight">
                 <b className="font-extrabold text-[15px] tracking-[0.14em] uppercase text-white whitespace-nowrap">Roar Ladies Roar</b>
                 <small className="text-[10.5px] tracking-[0.34em] uppercase font-semibold text-white">Ministry</small>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import useReveal from '../hooks/useReveal'
 
 const agenda = [
@@ -11,6 +12,34 @@ const agenda = [
 
 export default function Conference() {
   useReveal()
+
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+
+  useEffect(() => {
+    // Target date: November 6, 2026
+    const target = new Date('2026-11-06T18:00:00Z')
+    
+    const updateTime = () => {
+      const now = new Date()
+      const diffMs = target.getTime() - now.getTime()
+      
+      if (diffMs <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        return
+      }
+      
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+      const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
+      const seconds = Math.floor((diffMs % (1000 * 60)) / 1000)
+      
+      setTimeLeft({ days, hours, minutes, seconds })
+    }
+    
+    updateTime()
+    const timer = setInterval(updateTime, 1000)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <>
@@ -33,6 +62,21 @@ export default function Conference() {
           >
             Our annual gathering is designed for spiritual renewal — where women experience God, are equipped to live boldly, and are sent out to pursue their God-given purpose.
           </p>
+
+          <div className="timer-container reveal d2">
+            {[
+              { label: 'Days', val: timeLeft.days },
+              { label: 'Hours', val: timeLeft.hours },
+              { label: 'Minutes', val: timeLeft.minutes },
+              { label: 'Seconds', val: timeLeft.seconds }
+            ].map(({ label, val }) => (
+              <div key={label} className="timer-card">
+                <span className="timer-val">{String(val).padStart(2, '0')}</span>
+                <span className="timer-lbl">{label}</span>
+              </div>
+            ))}
+          </div>
+
           <div className="flex flex-wrap gap-4 mt-10 reveal d3">
             <Link to="/connect" className="btn btn-primary btn-arrow">Register your interest</Link>
             <Link to="/connect" className="btn btn-ghost-light">Get more info</Link>

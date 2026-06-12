@@ -64,9 +64,10 @@ export default function About() {
           style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,300px),1fr))' }}
         >
           <div className="reveal" style={{ maxWidth: '400px' }}>
-            <div
-              className="ph-placeholder ph-rounded w-full"
-              data-label="Lady Pastor Tracy — portrait"
+            <img
+              src="/tracy-portrait.jpeg"
+              alt="Lady Pastor Mrs Tracy Anyomi"
+              className="w-full object-cover rounded-[26px]"
               style={{ aspectRatio: '3/4', boxShadow: 'var(--shadow-lg)' }}
             />
           </div>

@@ -1,6 +1,24 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useReveal from '../hooks/useReveal'
+
+const testimonies = [
+  {
+    quote: "This ministry rekindled my prayer life. I found a sisterhood that holds me up and a purpose I had buried for years.",
+    name: "Adaeze O.",
+    location: "Lagos, Nigeria"
+  },
+  {
+    quote: "I joined feeling alone. Today I lead a small group of women in my city. Roar Ladies Roar gave me my voice.",
+    name: "Grace M.",
+    location: "Accra, Ghana"
+  },
+  {
+    quote: "The Encounter Conference was a turning point. I left renewed, bold and on fire for what God has called me to do.",
+    name: "Ruth A.",
+    location: "London, UK"
+  }
+]
 
 /* ---------- Marquee Strip ---------- */
 function MarqueeStrip() {
@@ -42,9 +60,9 @@ function SchedCard({ day, time, desc, delay = '' }) {
 }
 
 /* ---------- Testimony Card ---------- */
-function TestiCard({ quote, name, location, delay = '' }) {
+function TestiCard({ quote, name, location }) {
   return (
-    <figure className={`card-rlr flex flex-col justify-between gap-6 reveal ${delay}`} style={{ margin: 0 }}>
+    <figure className="card-rlr flex flex-col justify-between gap-6" style={{ margin: 0, minHeight: '240px' }}>
       <p className="testi-quote">"{quote}"</p>
       <figcaption className="flex items-center gap-4">
         <span className="testi-avatar" />
@@ -59,6 +77,7 @@ function TestiCard({ quote, name, location, delay = '' }) {
 
 export default function Home() {
   useReveal()
+  const [activeSlide, setActiveSlide] = useState(0)
 
   return (
     <>
@@ -70,7 +89,25 @@ export default function Home() {
         >
           {/* Copy */}
           <div>
-            <span className="eyebrow reveal">A global sisterhood on fire</span>
+            <span 
+              className="reveal mb-6" 
+              style={{ 
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.6em',
+                background: 'var(--blush-2)',
+                color: 'var(--magenta)',
+                fontSize: '13.5px',
+                fontWeight: 700,
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                padding: '10px 18px',
+                borderRadius: '100px',
+                boxShadow: '0 4px 12px rgba(164, 24, 124, 0.05)'
+              }}
+            >
+              🔥 A global sisterhood on fire
+            </span>
             <h1 className="hero-title reveal d1">
               Roar, Ladies.<br />
               <span style={{ color: 'var(--pink)', fontStyle: 'italic' }}>Roar.</span>
@@ -92,9 +129,10 @@ export default function Home() {
 
           {/* Media */}
           <div className="relative reveal d2" style={{ maxWidth: '460px', width: '100%', marginInline: 'auto' }}>
-            <div
-              className="ph-placeholder ph-rounded w-full"
-              data-label="women in worship — portrait"
+            <img
+              src="/worship-hero.JPEG"
+              alt="Women in Worship"
+              className="w-full object-cover rounded-[26px]"
               style={{ aspectRatio: '4/5', boxShadow: 'var(--shadow-lg)' }}
             />
             <div
@@ -185,9 +223,10 @@ export default function Home() {
           style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,300px),1fr))' }}
         >
           <div className="reveal" style={{ maxWidth: '380px' }}>
-            <div
-              className="ph-placeholder ph-rounded w-full"
-              data-label="Lady Pastor Tracy — portrait"
+            <img
+              src="/tracy-portrait.jpeg"
+              alt="Lady Pastor Mrs Tracy Anyomi"
+              className="w-full object-cover rounded-[26px]"
               style={{ aspectRatio: '3/4', boxShadow: 'var(--shadow)' }}
             />
           </div>
@@ -273,24 +312,50 @@ export default function Home() {
             <span className="eyebrow eyebrow-center">Voices from the community</span>
             <h2 className="section-head-h2">Lives being transformed</h2>
           </div>
-          <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,280px),1fr))' }}>
-            <TestiCard
-              quote="This ministry rekindled my prayer life. I found a sisterhood that holds me up and a purpose I had buried for years."
-              name="Adaeze O."
-              location="Lagos, Nigeria"
-            />
-            <TestiCard
-              quote="I joined feeling alone. Today I lead a small group of women in my city. Roar Ladies Roar gave me my voice."
-              name="Grace M."
-              location="Accra, Ghana"
-              delay="d1"
-            />
-            <TestiCard
-              quote="The Encounter Conference was a turning point. I left renewed, bold and on fire for what God has called me to do."
-              name="Ruth A."
-              location="London, UK"
-              delay="d2"
-            />
+          
+          <div className="carousel-container reveal">
+            <div 
+              className="carousel-track" 
+              style={{ transform: `translateX(-${activeSlide * 100}%)` }}
+            >
+              {testimonies.map((testi, i) => (
+                <div key={i} className="carousel-slide px-4">
+                  <TestiCard
+                    quote={testi.quote}
+                    name={testi.name}
+                    location={testi.location}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Slider Controls */}
+            <div className="flex justify-between items-center mt-8 max-w-[220px] mx-auto">
+              <button 
+                onClick={() => setActiveSlide((prev) => (prev === 0 ? testimonies.length - 1 : prev - 1))}
+                className="carousel-nav-btn"
+                aria-label="Previous testimony"
+              >
+                ←
+              </button>
+              <div className="carousel-dots">
+                {testimonies.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveSlide(i)}
+                    className={`carousel-dot ${activeSlide === i ? 'active' : ''}`}
+                    aria-label={`Go to testimony ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <button 
+                onClick={() => setActiveSlide((prev) => (prev === testimonies.length - 1 ? 0 : prev + 1))}
+                className="carousel-nav-btn"
+                aria-label="Next testimony"
+              >
+                →
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -307,16 +372,17 @@ export default function Home() {
           </div>
           <div className="gallery-strip reveal d1">
             {[
-              { label: 'worship night', tall: true },
-              { label: 'women praying', tall: false },
-              { label: 'conference stage', tall: false },
-              { label: 'fellowship', tall: true },
-            ].map(({ label, tall }, i) => (
-              <div
+              { src: '/gallery-worship-night.JPEG', alt: 'Worship night' },
+              { src: '/gallery-worship2.JPEG', alt: 'Women praying' },
+              { src: '/gallery-conference-stage.JPEG', alt: 'Conference stage' },
+              { src: '/gallery-fellowship.JPEG', alt: 'Fellowship' },
+            ].map(({ src, alt }, i) => (
+              <img
                 key={i}
-                className="ph-placeholder"
-                data-label={label}
-                style={{ aspectRatio: tall ? '3/4' : '3/4' }}
+                src={src}
+                alt={alt}
+                className="w-full object-cover rounded-[14px]"
+                style={{ aspectRatio: '3/4' }}
               />
             ))}
           </div>
