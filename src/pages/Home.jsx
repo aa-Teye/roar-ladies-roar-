@@ -89,24 +89,7 @@ export default function Home() {
         >
           {/* Copy */}
           <div>
-            <span 
-              className="reveal mb-6" 
-              style={{ 
-                display: 'inline-flex',
-                alignItems: 'center',
-                background: 'var(--blush-2)',
-                color: 'var(--magenta)',
-                fontSize: '13.5px',
-                fontWeight: 700,
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                padding: '10px 18px',
-                borderRadius: '100px',
-                boxShadow: '0 4px 12px rgba(164, 24, 124, 0.05)'
-              }}
-            >
-              A global sisterhood on fire
-            </span>
+            <span className="eyebrow reveal">A global sisterhood on fire</span>
             <h1 className="hero-title reveal d1">
               Roar, Ladies.<br />
               <span style={{ color: 'var(--pink)', fontStyle: 'italic' }}>Roar.</span>
