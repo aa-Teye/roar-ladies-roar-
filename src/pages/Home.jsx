@@ -65,10 +65,10 @@ export default function Home() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="section-rlr" style={{ paddingTop: 'clamp(40px,5vw,72px)', paddingBottom: 'clamp(48px,6vw,90px)' }}>
+      <section className="section-rlr" style={{ paddingTop: 'clamp(40px,5vw,72px)', paddingBottom: 0 }}>
         <div
           className="container-rlr grid gap-[clamp(36px,5vw,80px)] items-center"
-          style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,420px),1fr))' }}
+          style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,420px),1fr))', paddingBottom: 'clamp(48px,6vw,90px)' }}
         >
           {/* Copy */}
           <div>
@@ -111,10 +111,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ===== NEWS TICKER PLACEHOLDER ===== */}
-      <div id="hero-crawler-placeholder" className="h-[46px]"></div>
+        {/* ===== NEWS TICKER PLACEHOLDER ===== */}
+        <div id="hero-crawler-placeholder" className="h-[46px]"></div>
+      </section>
 
       {/* ===== WELCOME ===== */}
       <section className="section-rlr">

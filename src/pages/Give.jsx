@@ -41,9 +41,9 @@ export default function Give() {
       {/* Page hero */}
       <section
         className="section-rlr"
-        style={{ background: 'var(--plum)', color: '#F7E9F2', paddingBottom: 'clamp(48px,6vw,80px)' }}
+        style={{ background: 'var(--plum)', color: '#F7E9F2', paddingBottom: 0 }}
       >
-        <div className="container-rlr" style={{ maxWidth: '800px' }}>
+        <div className="container-rlr" style={{ maxWidth: '800px', paddingBottom: 'clamp(48px,6vw,80px)' }}>
           <span className="eyebrow eyebrow-rose reveal">Give & Partner</span>
           <h1
             className="display-text text-white mt-5 reveal d1"
@@ -59,10 +59,10 @@ export default function Give() {
             Every gift you give plants a seed of faith, purpose, and transformation in the life of a woman somewhere in the world. Thank you for partnering with us.
           </p>
         </div>
-      </section>
 
-      {/* ===== NEWS TICKER PLACEHOLDER ===== */}
-      <div id="hero-crawler-placeholder" className="h-[46px]"></div>
+        {/* ===== NEWS TICKER PLACEHOLDER ===== */}
+        <div id="hero-crawler-placeholder" className="h-[46px]"></div>
+      </section>
 
       {/* Why give */}
       <section className="section-rlr">
