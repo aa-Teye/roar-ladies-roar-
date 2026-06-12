@@ -94,7 +94,6 @@ export default function Home() {
               style={{ 
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.6em',
                 background: 'var(--blush-2)',
                 color: 'var(--magenta)',
                 fontSize: '13.5px',
@@ -106,7 +105,7 @@ export default function Home() {
                 boxShadow: '0 4px 12px rgba(164, 24, 124, 0.05)'
               }}
             >
-              🔥 A global sisterhood on fire
+              A global sisterhood on fire
             </span>
             <h1 className="hero-title reveal d1">
               Roar, Ladies.<br />
