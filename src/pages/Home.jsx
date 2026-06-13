@@ -66,11 +66,11 @@ export default function Home() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section 
-        className="section-rlr relative flex flex-col justify-between overflow-hidden" 
-        style={{ 
-          paddingTop: 'clamp(10px, 1.8vh, 24px)', 
-          paddingBottom: 0, 
+      <section
+        className="section-rlr relative flex flex-col justify-between overflow-hidden"
+        style={{
+          paddingTop: 'clamp(10px, 1.8vh, 24px)',
+          paddingBottom: 0,
           paddingBlockEnd: 0,
           minHeight: 'calc(100vh - 78px)',
           display: 'flex',
@@ -80,8 +80,8 @@ export default function Home() {
       >
         <div
           className="container-rlr grid gap-[clamp(20px,3.5vh,36px)] items-center"
-          style={{ 
-            gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,400px),1fr))', 
+          style={{
+            gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,400px),1fr))',
             paddingBottom: 'clamp(10px,2vh,20px)',
             flexGrow: 1
           }}
@@ -91,9 +91,9 @@ export default function Home() {
             <span className="eyebrow reveal">A global sisterhood on fire</span>
             <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(54px, 7.5vw, 92px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
               Roar. Ladies.<br />
-              <span style={{ 
-                background: 'linear-gradient(135deg, var(--pink) 30%, var(--magenta) 100%)', 
-                WebkitBackgroundClip: 'text', 
+              <span style={{
+                background: 'linear-gradient(135deg, var(--pink) 30%, var(--magenta) 100%)',
+                WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 fontStyle: 'italic',
                 fontFamily: 'var(--serif)',
@@ -105,7 +105,7 @@ export default function Home() {
               </span>
             </h1>
             <p className="lead-text reveal d2" style={{ maxWidth: '540px', fontSize: 'clamp(17px, 1.25vw, 20px)', lineHeight: '1.55' }}>
-              A global community of prayerful, passionate and purpose-driven women — growing deeper in God, discovering our purpose, and transforming our world through His love.
+              A global community of prayerful, passionate and purpose-driven women, growing deeper in God, discovering our purpose, and transforming our world through His love.
             </p>
             <div className="flex flex-wrap gap-4 mt-6 reveal d3">
               <Link to="/connect" className="btn btn-primary btn-arrow">Join the community</Link>
@@ -129,11 +129,11 @@ export default function Home() {
             />
             <div
               className="absolute flex items-center gap-4 bg-white rounded-[18px]"
-              style={{ 
-                left: '-26px', 
-                bottom: '38px', 
-                padding: 'clamp(14px, 1.5vw, 20px) clamp(16px, 2vw, 24px)', 
-                boxShadow: 'var(--shadow)' 
+              style={{
+                left: '-26px',
+                bottom: '38px',
+                padding: 'clamp(14px, 1.5vw, 20px) clamp(16px, 2vw, 24px)',
+                boxShadow: 'var(--shadow)'
               }}
             >
               <span className="font-serif font-bold leading-none" style={{ color: 'var(--pink)', fontFamily: 'var(--serif)', fontSize: 'clamp(36px, 3vw, 42px)' }}>3×</span>
@@ -309,10 +309,10 @@ export default function Home() {
             <span className="eyebrow eyebrow-center">Voices from the community</span>
             <h2 className="section-head-h2">Lives being transformed</h2>
           </div>
-          
+
           <div className="carousel-container reveal">
-            <div 
-              className="carousel-track" 
+            <div
+              className="carousel-track"
               style={{ transform: `translateX(-${activeSlide * 100}%)` }}
             >
               {testimonies.map((testi, i) => (
@@ -328,7 +328,7 @@ export default function Home() {
 
             {/* Slider Controls */}
             <div className="flex justify-between items-center mt-8 max-w-[220px] mx-auto">
-              <button 
+              <button
                 onClick={() => setActiveSlide((prev) => (prev === 0 ? testimonies.length - 1 : prev - 1))}
                 className="carousel-nav-btn"
                 aria-label="Previous testimony"
@@ -345,7 +345,7 @@ export default function Home() {
                   />
                 ))}
               </div>
-              <button 
+              <button
                 onClick={() => setActiveSlide((prev) => (prev === testimonies.length - 1 ? 0 : prev + 1))}
                 className="carousel-nav-btn"
                 aria-label="Next testimony"
