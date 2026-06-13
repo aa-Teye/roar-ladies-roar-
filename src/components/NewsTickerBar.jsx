@@ -60,6 +60,7 @@ export default function NewsTickerBar({ isInline, isSticky }) {
         setStyle({
           position: 'absolute',
           top: `${footerBottomY - inlineHeight}px`,
+          bottom: 'auto',
           left: 0,
           right: 0,
           zIndex: 900,
@@ -69,6 +70,7 @@ export default function NewsTickerBar({ isInline, isSticky }) {
         setStyle({
           position: 'fixed',
           bottom: 0,
+          top: 'auto',
           left: 0,
           right: 0,
           zIndex: 900,
