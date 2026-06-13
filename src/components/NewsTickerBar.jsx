@@ -64,7 +64,7 @@ export default function NewsTickerBar({ isInline, isSticky }) {
           left: 0,
           right: 0,
           zIndex: 900,
-          display: 'block'
+          display: 'flex'
         })
       } else {
         setStyle({
@@ -74,7 +74,7 @@ export default function NewsTickerBar({ isInline, isSticky }) {
           left: 0,
           right: 0,
           zIndex: 900,
-          display: 'block'
+          display: 'flex'
         })
       }
     }
