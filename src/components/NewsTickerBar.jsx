@@ -18,6 +18,14 @@ export default function NewsTickerBar({ isInline, isSticky }) {
   ]
 
   useEffect(() => {
+    if (!isSticky) return
+    document.body.classList.add('has-ticker')
+    return () => {
+      document.body.classList.remove('has-ticker')
+    }
+  }, [isSticky])
+
+  useEffect(() => {
     if (isInline) return
 
     const handleScrollAndResize = () => {
@@ -39,18 +47,19 @@ export default function NewsTickerBar({ isInline, isSticky }) {
       const inlineHeight = inlineRect.height || 46
       const threshold = inlineY - 78 // Header offset
 
-      let footerY = document.documentElement.scrollHeight
+      let footerBottomY = document.documentElement.scrollHeight
       if (footer) {
         const footerRect = footer.getBoundingClientRect()
-        footerY = footerRect.top + scrollY
+        const footerY = footerRect.top + scrollY
+        footerBottomY = footerY + footerRect.height
       }
 
       if (scrollY < threshold) {
         setStyle({ display: 'none' })
-      } else if (viewportBottom >= footerY) {
+      } else if (viewportBottom >= footerBottomY) {
         setStyle({
           position: 'absolute',
-          top: `${footerY - inlineHeight}px`,
+          top: `${footerBottomY - inlineHeight}px`,
           left: 0,
           right: 0,
           zIndex: 900,

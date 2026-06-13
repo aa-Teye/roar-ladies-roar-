@@ -48,7 +48,6 @@
     line-height: 1.65;
     color: var(--ink);
     background: var(--paper);
-    padding-bottom: 50px;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -517,7 +516,7 @@
   /* ---------- floating whatsapp bubble ---------- */
   .whatsapp-bubble {
     position: fixed;
-    bottom: 78px;
+    bottom: 24px;
     right: 24px;
     background-color: #25D366;
     width: 58px;
@@ -529,11 +528,14 @@
     box-shadow: 0 6px 22px rgba(37, 211, 102, 0.4);
     cursor: pointer;
     z-index: 999;
-    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), bottom 0.3s var(--ease);
   }
   .whatsapp-bubble:hover {
     transform: scale(1.1) translateY(-2px);
     box-shadow: 0 8px 26px rgba(37, 211, 102, 0.6);
+  }
+  body.has-ticker .whatsapp-bubble {
+    bottom: 78px;
   }
   .whatsapp-bubble svg {
     fill: #fff;
