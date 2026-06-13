@@ -66,16 +66,31 @@ export default function Home() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="section-rlr" style={{ paddingTop: 'clamp(40px,5vw,72px)', paddingBottom: 0, paddingBlockEnd: 0 }}>
+      <section 
+        className="section-rlr relative flex flex-col justify-between overflow-hidden" 
+        style={{ 
+          paddingTop: 'clamp(40px,5vw,72px)', 
+          paddingBottom: 0, 
+          paddingBlockEnd: 0,
+          minHeight: 'calc(100vh - 78px)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between'
+        }}
+      >
         <div
           className="container-rlr grid gap-[clamp(36px,5vw,80px)] items-center"
-          style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,420px),1fr))', paddingBottom: 'clamp(48px,6vw,90px)' }}
+          style={{ 
+            gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,420px),1fr))', 
+            paddingBottom: 'clamp(48px,6vw,90px)',
+            flexGrow: 1
+          }}
         >
           {/* Copy */}
           <div>
             <span className="eyebrow reveal">A global sisterhood on fire</span>
             <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(52px, 7.5vw, 92px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
-              Roar.<br />
+              Roar. Ladies.<br />
               <span style={{ 
                 background: 'linear-gradient(135deg, var(--pink) 30%, var(--magenta) 100%)', 
                 WebkitBackgroundClip: 'text', 
@@ -86,9 +101,8 @@ export default function Home() {
                 display: 'inline-block',
                 paddingRight: '10px'
               }}>
-                Ladies.
-              </span><br />
-              Roar.
+                Roar.
+              </span>
             </h1>
             <p className="lead-text reveal d2" style={{ maxWidth: '520px' }}>
               A global community of prayerful, passionate and purpose-driven women — growing deeper in God, discovering our purpose, and transforming our world through His love.
