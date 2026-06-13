@@ -156,7 +156,7 @@ export default function Header() {
                 e.stopPropagation()
                 setLangMenuOpen(!langMenuOpen)
               }}
-              className="flex items-center justify-center gap-1.5 px-2.5 h-11 rounded-[11px] border cursor-pointer transition-all duration-200 hover:border-[color:var(--pink)]"
+              className="flex items-center justify-center gap-1 md:gap-1.5 px-1.5 md:px-2.5 h-9 md:h-11 rounded-[9px] md:rounded-[11px] border cursor-pointer transition-all duration-200 hover:border-[color:var(--pink)]"
               style={{ 
                 borderColor: 'var(--line)', 
                 background: 'var(--paper)',
@@ -165,12 +165,12 @@ export default function Header() {
               aria-label="Select Language"
               title="Select Language"
             >
-              <svg className="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="w-4 h-4 md:w-5 md:h-5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
               </svg>
-              <span className="text-[12px] font-bold tracking-wider">{currentLang}</span>
+              <span className="text-[10px] md:text-[12px] font-bold tracking-wider">{currentLang}</span>
             </button>
 
             {langMenuOpen && (
@@ -199,7 +199,7 @@ export default function Header() {
 
           <button
             onClick={() => setDark(!dark)}
-            className="flex items-center justify-center w-11 h-11 rounded-[11px] border cursor-pointer transition-all duration-200 hover:border-[color:var(--pink)] flex-none"
+            className="flex items-center justify-center w-9 h-9 md:w-11 md:h-11 rounded-[9px] md:rounded-[11px] border cursor-pointer transition-all duration-200 hover:border-[color:var(--pink)] flex-none"
             style={{ 
               borderColor: 'var(--line)', 
               background: 'var(--paper)',
@@ -208,7 +208,7 @@ export default function Header() {
             aria-label="Toggle dark mode"
           >
             {dark ? (
-              <svg className="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="w-4 h-4 md:w-5 md:h-5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="5"></circle>
                 <line x1="12" y1="1" x2="12" y2="3"></line>
                 <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -220,7 +220,7 @@ export default function Header() {
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
               </svg>
             ) : (
-              <svg className="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="w-4 h-4 md:w-5 md:h-5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
               </svg>
             )}
@@ -230,15 +230,19 @@ export default function Header() {
           </Link>
           <button
             id="nav-toggle-btn"
-            className={`md:hidden flex items-center justify-center flex-col gap-[5px] w-11 h-11 rounded-[11px] border bg-white cursor-pointer transition-colors duration-200 ${menuOpen ? 'nav-open' : ''}`}
-            style={{ borderColor: 'var(--line)' }}
+            className={`md:hidden flex items-center justify-center flex-col gap-[4px] md:gap-[5px] w-9 h-9 md:w-11 md:h-11 rounded-[9px] md:rounded-[11px] border cursor-pointer transition-colors duration-200 ${menuOpen ? 'nav-open' : ''}`}
+            style={{ 
+              borderColor: 'var(--line)',
+              background: 'var(--paper)',
+              color: 'var(--ink)'
+            }}
             aria-label="Menu"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
           >
-            <span className={`nav-toggle-bar bar-1 ${menuOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
-            <span className={`nav-toggle-bar bar-2 ${menuOpen ? 'opacity-0' : ''}`} />
-            <span className={`nav-toggle-bar bar-3 ${menuOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
+            <span className="nav-toggle-bar bar-1" />
+            <span className="nav-toggle-bar bar-2" />
+            <span className="nav-toggle-bar bar-3" />
           </button>
         </div>
       </div>

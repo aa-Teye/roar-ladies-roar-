@@ -555,7 +555,13 @@
   }
 
   .nav-open .bar-1 {
-    transform: translateY(7px) rotate(45deg);
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  @media (min-width: 768px) {
+    .nav-open .bar-1 {
+      transform: translateY(7px) rotate(45deg);
+    }
   }
 
   .nav-open .bar-2 {
@@ -563,7 +569,13 @@
   }
 
   .nav-open .bar-3 {
-    transform: translateY(-7px) rotate(-45deg);
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  @media (min-width: 768px) {
+    .nav-open .bar-3 {
+      transform: translateY(-7px) rotate(-45deg);
+    }
   }
 
   /* ---------- gallery strip ---------- */
