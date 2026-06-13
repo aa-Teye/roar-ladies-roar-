@@ -69,7 +69,7 @@ export default function Home() {
       <section 
         className="section-rlr relative flex flex-col justify-between overflow-hidden" 
         style={{ 
-          paddingTop: 'clamp(20px, 3vh, 48px)', 
+          paddingTop: 'clamp(12px, 2.2vh, 32px)', 
           paddingBottom: 0, 
           paddingBlockEnd: 0,
           minHeight: 'calc(100vh - 78px)',
@@ -79,17 +79,17 @@ export default function Home() {
         }}
       >
         <div
-          className="container-rlr grid gap-[clamp(32px,5vw,64px)] items-center"
+          className="container-rlr grid gap-[clamp(24px,4vh,44px)] items-center"
           style={{ 
-            gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,460px),1fr))', 
-            paddingBottom: 'clamp(20px,4vh,48px)',
+            gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,400px),1fr))', 
+            paddingBottom: 'clamp(12px,2.5vh,24px)',
             flexGrow: 1
           }}
         >
           {/* Copy */}
           <div>
             <span className="eyebrow reveal">A global sisterhood on fire</span>
-            <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(62px, 8.5vw, 110px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
+            <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(50px, 7vw, 84px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
               Roar. Ladies.<br />
               <span style={{ 
                 background: 'linear-gradient(135deg, var(--pink) 30%, var(--magenta) 100%)', 
@@ -104,7 +104,7 @@ export default function Home() {
                 Roar.
               </span>
             </h1>
-            <p className="lead-text reveal d2" style={{ maxWidth: '600px', fontSize: 'clamp(18px, 1.3vw, 22px)', lineHeight: '1.6' }}>
+            <p className="lead-text reveal d2" style={{ maxWidth: '520px', fontSize: 'clamp(16px, 1.2vw, 19px)', lineHeight: '1.55' }}>
               A global community of prayerful, passionate and purpose-driven women — growing deeper in God, discovering our purpose, and transforming our world through His love.
             </p>
             <div className="flex flex-wrap gap-4 mt-8 reveal d3">
@@ -120,24 +120,24 @@ export default function Home() {
           </div>
 
           {/* Media */}
-          <div className="relative reveal d2" style={{ maxWidth: 'min(560px, 100%)', width: '100%', marginInline: 'auto' }}>
+          <div className="relative reveal d2" style={{ maxWidth: 'min(420px, 100%)', width: '100%', marginInline: 'auto' }}>
             <img
               src="/worship-hero.JPEG"
               alt="Women in Worship"
               className="w-full object-cover rounded-[26px]"
-              style={{ aspectRatio: '4/5', boxShadow: 'var(--shadow-lg)', maxHeight: 'min(660px, 64vh)' }}
+              style={{ aspectRatio: '4/5', boxShadow: 'var(--shadow-lg)', maxHeight: 'min(500px, 48vh)' }}
             />
             <div
               className="absolute flex items-center gap-4 bg-white rounded-[18px]"
               style={{ 
                 left: '-26px', 
                 bottom: '38px', 
-                padding: 'clamp(14px, 1.5vw, 22px) clamp(18px, 2vw, 26px)', 
+                padding: 'clamp(14px, 1.5vw, 20px) clamp(16px, 2vw, 24px)', 
                 boxShadow: 'var(--shadow)' 
               }}
             >
-              <span className="font-serif font-bold leading-none" style={{ color: 'var(--pink)', fontFamily: 'var(--serif)', fontSize: 'clamp(38px, 3.2vw, 46px)' }}>3×</span>
-              <span className="font-semibold leading-[1.3]" style={{ color: 'var(--ink)', fontSize: 'clamp(12px, 1.1vw, 15px)' }}>
+              <span className="font-serif font-bold leading-none" style={{ color: 'var(--pink)', fontFamily: 'var(--serif)', fontSize: 'clamp(36px, 3vw, 42px)' }}>3×</span>
+              <span className="font-semibold leading-[1.3]" style={{ color: 'var(--ink)', fontSize: 'clamp(12px, 1vw, 14px)' }}>
                 online gatherings<br />every week
               </span>
             </div>
