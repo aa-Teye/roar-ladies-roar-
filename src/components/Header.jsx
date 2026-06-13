@@ -95,6 +95,7 @@ export default function Header() {
 
         {/* CTA + hamburger */}
         <div className="flex items-center gap-3">
+          <div id="google_translate_element" className="mr-1"></div>
           <button
             onClick={() => setDark(!dark)}
             className="flex items-center justify-center w-11 h-11 rounded-[11px] border cursor-pointer transition-all duration-200 hover:border-[color:var(--pink)]"
