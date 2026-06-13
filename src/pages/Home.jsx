@@ -74,9 +74,21 @@ export default function Home() {
           {/* Copy */}
           <div>
             <span className="eyebrow reveal">A global sisterhood on fire</span>
-            <h1 className="hero-title reveal d1">
-              Roar, Ladies.<br />
-              <span style={{ color: 'var(--pink)', fontStyle: 'italic' }}>Roar.</span>
+            <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(52px, 7.5vw, 92px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
+              Roar.<br />
+              <span style={{ 
+                background: 'linear-gradient(135deg, var(--pink) 30%, var(--magenta) 100%)', 
+                WebkitBackgroundClip: 'text', 
+                WebkitTextFillColor: 'transparent',
+                fontStyle: 'italic',
+                fontFamily: 'var(--serif)',
+                fontWeight: '500',
+                display: 'inline-block',
+                paddingRight: '10px'
+              }}>
+                Ladies.
+              </span><br />
+              Roar.
             </h1>
             <p className="lead-text reveal d2" style={{ maxWidth: '520px' }}>
               A global community of prayerful, passionate and purpose-driven women — growing deeper in God, discovering our purpose, and transforming our world through His love.
