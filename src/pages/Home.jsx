@@ -69,7 +69,7 @@ export default function Home() {
       <section 
         className="section-rlr relative flex flex-col justify-between overflow-hidden" 
         style={{ 
-          paddingTop: 'clamp(40px,5vw,72px)', 
+          paddingTop: 'clamp(20px, 3vh, 48px)', 
           paddingBottom: 0, 
           paddingBlockEnd: 0,
           minHeight: 'calc(100vh - 78px)',
@@ -79,17 +79,17 @@ export default function Home() {
         }}
       >
         <div
-          className="container-rlr grid gap-[clamp(36px,5vw,80px)] items-center"
+          className="container-rlr grid gap-[clamp(24px,4vh,48px)] items-center"
           style={{ 
             gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,420px),1fr))', 
-            paddingBottom: 'clamp(48px,6vw,90px)',
+            paddingBottom: 'clamp(20px,4vh,48px)',
             flexGrow: 1
           }}
         >
           {/* Copy */}
           <div>
             <span className="eyebrow reveal">A global sisterhood on fire</span>
-            <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(52px, 7.5vw, 92px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
+            <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(44px, 6vw, 78px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
               Roar. Ladies.<br />
               <span style={{ 
                 background: 'linear-gradient(135deg, var(--pink) 30%, var(--magenta) 100%)', 
@@ -120,12 +120,12 @@ export default function Home() {
           </div>
 
           {/* Media */}
-          <div className="relative reveal d2" style={{ maxWidth: '460px', width: '100%', marginInline: 'auto' }}>
+          <div className="relative reveal d2" style={{ maxWidth: 'min(384px, 100%)', width: '100%', marginInline: 'auto' }}>
             <img
               src="/worship-hero.JPEG"
               alt="Women in Worship"
               className="w-full object-cover rounded-[26px]"
-              style={{ aspectRatio: '4/5', boxShadow: 'var(--shadow-lg)' }}
+              style={{ aspectRatio: '4/5', boxShadow: 'var(--shadow-lg)', maxHeight: 'min(480px, 45vh)' }}
             />
             <div
               className="absolute flex items-center gap-4 bg-white rounded-[18px]"
