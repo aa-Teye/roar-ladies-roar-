@@ -7,17 +7,20 @@ const testimonies = [
   {
     quote: "This ministry rekindled my prayer life. I found a sisterhood that holds me up and a purpose I had buried for years.",
     name: "Adaeze O.",
-    location: "Lagos, Nigeria"
+    location: "Lagos, Nigeria",
+    image: "/testi-adaeze.png"
   },
   {
     quote: "I joined feeling alone. Today I lead a small group of women in my city. Roar Ladies Roar gave me my voice.",
     name: "Grace M.",
-    location: "Accra, Ghana"
+    location: "Accra, Ghana",
+    image: "/testi-grace.png"
   },
   {
     quote: "The Encounter Conference was a turning point. I left renewed, bold and on fire for what God has called me to do.",
     name: "Ruth A.",
-    location: "London, UK"
+    location: "London, UK",
+    image: "/testi-ruth.png"
   }
 ]
 
@@ -44,17 +47,47 @@ function SchedCard({ day, time, desc, delay = '' }) {
 }
 
 /* ---------- Testimony Card ---------- */
-function TestiCard({ quote, name, location }) {
+function TestiCard({ quote, name, location, image }) {
   return (
-    <figure className="card-rlr flex flex-col justify-between gap-6" style={{ margin: 0, minHeight: '240px' }}>
-      <p className="testi-quote">"{quote}"</p>
-      <figcaption className="flex items-center gap-4">
-        <span className="testi-avatar" />
-        <b className="flex flex-col font-bold text-[15px]">
-          {name}
-          <small className="font-medium text-[13px] mt-0.5" style={{ color: 'var(--muted)' }}>{location}</small>
-        </b>
-      </figcaption>
+    <figure 
+      className="card-rlr grid gap-6 md:gap-8 items-center" 
+      style={{ 
+        margin: 0, 
+        minHeight: '280px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))'
+      }}
+    >
+      {/* Left Column: Image */}
+      <div 
+        className="relative overflow-hidden rounded-[20px]" 
+        style={{ 
+          width: '100%', 
+          aspectRatio: '4/3', 
+          maxHeight: '240px',
+          boxShadow: 'var(--shadow-sm)'
+        }}
+      >
+        <img 
+          src={image} 
+          alt={name} 
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+        />
+      </div>
+
+      {/* Right Column: Copy */}
+      <div className="flex flex-col justify-between gap-5 text-left">
+        <p className="testi-quote" style={{ fontSize: 'clamp(15px, 1.1vw, 18px)', lineHeight: '1.6', color: 'var(--ink)' }}>
+          "{quote}"
+        </p>
+        <figcaption className="flex items-center gap-3">
+          <b className="flex flex-col font-bold text-[15px] leading-tight">
+            {name}
+            <small className="font-medium text-[12.5px] mt-1" style={{ color: 'var(--muted)', letterSpacing: '0.01em' }}>
+              {location}
+            </small>
+          </b>
+        </figcaption>
+      </div>
     </figure>
   )
 }
@@ -321,6 +354,7 @@ export default function Home() {
                     quote={testi.quote}
                     name={testi.name}
                     location={testi.location}
+                    image={testi.image}
                   />
                 </div>
               ))}
