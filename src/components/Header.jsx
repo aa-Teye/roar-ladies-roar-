@@ -16,6 +16,31 @@ export default function Header() {
     localStorage.getItem('theme') === 'dark' || 
     (localStorage.getItem('theme') === null && window.matchMedia('(prefers-color-scheme: dark)').matches)
   )
+  const [langMenuOpen, setLangMenuOpen] = useState(false)
+  const [currentLang, setCurrentLang] = useState('EN')
+
+  const languages = [
+    { code: 'en', label: 'English', flag: '🇬🇧' },
+    { code: 'fr', label: 'Français', flag: '🇫🇷' },
+    { code: 'es', label: 'Español', flag: '🇪🇸' },
+    { code: 'pt', label: 'Português', flag: '🇵🇹' },
+    { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
+    { code: 'it', label: 'Italiano', flag: '🇮🇹' },
+  ]
+
+  const changeLanguage = (code) => {
+    const selectEl = document.querySelector('select.goog-te-combo')
+    if (selectEl) {
+      selectEl.value = code
+      selectEl.dispatchEvent(new Event('change'))
+      
+      const found = languages.find(l => l.code === code)
+      if (found) {
+        setCurrentLang(found.code.toUpperCase())
+      }
+    }
+    setLangMenuOpen(false)
+  }
 
   useEffect(() => {
     if (dark) {
@@ -31,6 +56,32 @@ export default function Header() {
     const onScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (!langMenuOpen) return
+    const handleOutsideClick = () => setLangMenuOpen(false)
+    window.addEventListener('click', handleOutsideClick)
+    return () => window.removeEventListener('click', handleOutsideClick)
+  }, [langMenuOpen])
+
+  useEffect(() => {
+    const getCookie = (name) => {
+      const value = `; ${document.cookie}`
+      const parts = value.split(`; ${name}=`)
+      if (parts.length === 2) return parts.pop().split(';').shift()
+    }
+    // Check initial language cookie
+    const timer = setTimeout(() => {
+      const googtrans = getCookie('googtrans')
+      if (googtrans) {
+        const lang = googtrans.split('/').pop()
+        if (lang) {
+          setCurrentLang(lang.toUpperCase())
+        }
+      }
+    }, 1000)
+    return () => clearTimeout(timer)
   }, [])
 
   const closeMenu = () => setMenuOpen(false)
@@ -95,10 +146,60 @@ export default function Header() {
 
         {/* CTA + hamburger */}
         <div className="flex items-center gap-3">
-          <div id="google_translate_element" className="mr-1"></div>
+          {/* Hidden Google Translate Component */}
+          <div id="google_translate_element" style={{ display: 'none' }}></div>
+
+          {/* Custom Language Globe Dropdown */}
+          <div className="relative">
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setLangMenuOpen(!langMenuOpen)
+              }}
+              className="flex items-center justify-center gap-1.5 px-2.5 h-11 rounded-[11px] border cursor-pointer transition-all duration-200 hover:border-[color:var(--pink)]"
+              style={{ 
+                borderColor: 'var(--line)', 
+                background: 'var(--paper)',
+                color: 'var(--ink)'
+              }}
+              aria-label="Select Language"
+              title="Select Language"
+            >
+              <svg className="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span className="text-[12px] font-bold tracking-wider">{currentLang}</span>
+            </button>
+
+            {langMenuOpen && (
+              <div 
+                className="absolute right-0 mt-2 py-2 w-40 rounded-[12px] border z-[70]"
+                style={{
+                  background: 'var(--paper)',
+                  borderColor: 'var(--line)',
+                  boxShadow: 'var(--shadow)',
+                }}
+              >
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang.code)}
+                    className="flex items-center gap-3 w-full px-4 py-2 text-left text-[14px] font-semibold hover:bg-[color:var(--blush)] hover:text-[color:var(--magenta)] transition-colors duration-150"
+                    style={{ color: 'var(--ink)' }}
+                  >
+                    <span>{lang.flag}</span>
+                    <span>{lang.label}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           <button
             onClick={() => setDark(!dark)}
-            className="flex items-center justify-center w-11 h-11 rounded-[11px] border cursor-pointer transition-all duration-200 hover:border-[color:var(--pink)]"
+            className="flex items-center justify-center w-11 h-11 rounded-[11px] border cursor-pointer transition-all duration-200 hover:border-[color:var(--pink)] flex-none"
             style={{ 
               borderColor: 'var(--line)', 
               background: 'var(--paper)',
