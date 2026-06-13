@@ -78,10 +78,10 @@ export default function Header() {
                   to={to}
                   end={to === '/'}
                   className={({ isActive }) =>
-                    `text-[15px] font-semibold px-4 py-2 rounded-[9px] transition-colors duration-200 ${
+                    `nav-item-rlr text-[15px] font-semibold px-4 py-2 transition-colors duration-200 ${
                       isActive
-                        ? 'text-[color:var(--magenta)]'
-                        : 'hover:text-[color:var(--magenta)] hover:bg-[color:var(--blush)]'
+                        ? 'active text-[color:var(--magenta)]'
+                        : 'hover:text-[color:var(--magenta)]'
                     }`
                   }
                   style={{ color: 'var(--ink)' }}

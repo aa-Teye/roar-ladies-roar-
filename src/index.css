@@ -249,6 +249,31 @@
     padding: 11px 22px;
   }
 
+  /* ---------- nav item underline effect ---------- */
+  .nav-item-rlr {
+    position: relative;
+    display: inline-block;
+  }
+
+  .nav-item-rlr::after {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--pink), var(--magenta));
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.28s var(--ease);
+  }
+
+  .nav-item-rlr:hover::after,
+  .nav-item-rlr.active::after {
+    transform: scaleX(1);
+  }
+
   /* ---------- text link ---------- */
   .textlink {
     display: inline-flex;
