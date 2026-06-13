@@ -89,7 +89,7 @@ export default function Home() {
           {/* Copy */}
           <div>
             <span className="eyebrow reveal">A global sisterhood on fire</span>
-            <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(44px, 6vw, 78px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
+            <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(52px, 7.2vw, 90px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
               Roar. Ladies.<br />
               <span style={{ 
                 background: 'linear-gradient(135deg, var(--pink) 30%, var(--magenta) 100%)', 
@@ -120,12 +120,12 @@ export default function Home() {
           </div>
 
           {/* Media */}
-          <div className="relative reveal d2" style={{ maxWidth: 'min(384px, 100%)', width: '100%', marginInline: 'auto' }}>
+          <div className="relative reveal d2" style={{ maxWidth: 'min(440px, 100%)', width: '100%', marginInline: 'auto' }}>
             <img
               src="/worship-hero.JPEG"
               alt="Women in Worship"
               className="w-full object-cover rounded-[26px]"
-              style={{ aspectRatio: '4/5', boxShadow: 'var(--shadow-lg)', maxHeight: 'min(480px, 45vh)' }}
+              style={{ aspectRatio: '4/5', boxShadow: 'var(--shadow-lg)', maxHeight: 'min(540px, 50vh)' }}
             />
             <div
               className="absolute flex items-center gap-4 bg-white rounded-[18px]"
