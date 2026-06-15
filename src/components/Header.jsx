@@ -29,15 +29,26 @@ export default function Header() {
   ]
 
   const changeLanguage = (code) => {
+    console.log('[Translation] Attempting to change language to:', code)
     const selectEl = document.querySelector('select.goog-te-combo')
+    
+    const found = languages.find(l => l.code === code)
+    if (found) {
+      setCurrentLang(found.code.toUpperCase())
+    }
+
     if (selectEl) {
+      console.log('[Translation] Found goog-te-combo. Setting value and dispatching change event.')
       selectEl.value = code
       selectEl.dispatchEvent(new Event('change'))
+    } else {
+      console.warn('[Translation] select.goog-te-combo not found in DOM.')
+      console.log('[Translation] window.google:', window.google)
+      console.log('[Translation] #google_translate_element:', document.getElementById('google_translate_element'))
       
-      const found = languages.find(l => l.code === code)
-      if (found) {
-        setCurrentLang(found.code.toUpperCase())
-      }
+      // Fallback: Set the google translate cookie manually so it translates when ready or on reload
+      document.cookie = `googtrans=/en/${code}; path=/;`
+      // Also write to session storage or reload if needed, but cookie is usually enough for google translate
     }
     setLangMenuOpen(false)
   }
