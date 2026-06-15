@@ -1,25 +1,32 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import useReveal from '../hooks/useReveal'
 import NewsTickerBar from '../components/NewsTickerBar'
 
 const testimonies = [
   {
-    quote: "This ministry rekindled my prayer life. I found a sisterhood that holds me up and a purpose I had buried for years.",
+    quoteKey: 'home.testi1Quote',
+    defaultQuote: "This ministry rekindled my prayer life. I found a sisterhood that holds me up and a purpose I had buried for years.",
     name: "Adaeze O.",
-    location: "Lagos, Nigeria",
+    locationKey: 'home.testi1Loc',
+    defaultLocation: "Lagos, Nigeria",
     image: "/testi-adaeze.png"
   },
   {
-    quote: "I joined feeling alone. Today I lead a small group of women in my city. Roar Ladies Roar gave me my voice.",
+    quoteKey: 'home.testi2Quote',
+    defaultQuote: "I joined feeling alone. Today I lead a small group of women in my city. Roar Ladies Roar gave me my voice.",
     name: "Grace M.",
-    location: "Accra, Ghana",
+    locationKey: 'home.testi2Loc',
+    defaultLocation: "Accra, Ghana",
     image: "/testi-grace.png"
   },
   {
-    quote: "The Encounter Conference was a turning point. I left renewed, bold and on fire for what God has called me to do.",
+    quoteKey: 'home.testi3Quote',
+    defaultQuote: "The Encounter Conference was a turning point. I left renewed, bold and on fire for what God has called me to do.",
     name: "Ruth A.",
-    location: "London, UK",
+    locationKey: 'home.testi3Loc',
+    defaultLocation: "London, UK",
     image: "/testi-ruth.png"
   }
 ]
@@ -94,6 +101,7 @@ function TestiCard({ quote, name, location, image }) {
 
 export default function Home() {
   useReveal()
+  const { t } = useTranslation()
   const [activeSlide, setActiveSlide] = useState(0)
 
   return (
@@ -121,9 +129,9 @@ export default function Home() {
         >
           {/* Copy */}
           <div>
-            <span className="eyebrow reveal">A global sisterhood on fire</span>
+            <span className="eyebrow reveal">{t('home.heroSub', 'A global sisterhood on fire')}</span>
             <h1 className="hero-title reveal d1" style={{ fontSize: 'clamp(54px, 7.5vw, 92px)', lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '800' }}>
-              Roar. Ladies.<br />
+              {t('home.heroTitle1', 'Roar. Ladies.')}<br />
               <span style={{
                 background: 'linear-gradient(135deg, var(--pink) 30%, var(--magenta) 100%)',
                 WebkitBackgroundClip: 'text',
@@ -134,21 +142,21 @@ export default function Home() {
                 display: 'inline-block',
                 paddingRight: '10px'
               }}>
-                Roar.
+                {t('home.heroTitle2', 'Roar.')}
               </span>
             </h1>
             <p className="lead-text reveal d2" style={{ maxWidth: '540px', fontSize: 'clamp(17px, 1.25vw, 20px)', lineHeight: '1.55' }}>
-              A global community of prayerful, passionate and purpose-driven women, growing deeper in God, discovering our purpose, and transforming our world through His love.
+              {t('home.heroLead', 'A global community of prayerful, passionate and purpose-driven women, growing deeper in God, discovering our purpose, and transforming our world through His love.')}
             </p>
             <div className="flex flex-wrap gap-4 mt-6 reveal d3">
-              <Link to="/connect" className="btn btn-primary btn-arrow">Join the community</Link>
-              <Link to="/conference" className="btn btn-ghost">The Encounter Conference</Link>
+              <Link to="/connect" className="btn btn-primary btn-arrow">{t('about.ctaButton1', 'Join the community')}</Link>
+              <Link to="/conference" className="btn btn-ghost">{t('about.ctaButton2', 'The Encounter Conference')}</Link>
             </div>
             <p
               className="mt-6 text-[13px] font-bold tracking-[0.18em] uppercase reveal d4"
               style={{ color: 'var(--magenta)' }}
             >
-              Ladies on Fire for Christ · Global dominance through excellence
+              {t('home.tagline', 'Ladies on Fire for Christ · Global dominance through excellence')}
             </p>
           </div>
 
@@ -171,7 +179,7 @@ export default function Home() {
             >
               <span className="font-serif font-bold leading-none" style={{ color: 'var(--pink)', fontFamily: 'var(--serif)', fontSize: 'clamp(36px, 3vw, 42px)' }}>3×</span>
               <span className="font-semibold leading-[1.3]" style={{ color: 'var(--ink)', fontSize: 'clamp(12px, 1vw, 14px)' }}>
-                online gatherings<br />every week
+                {t('home.gatheringsCountLabel', 'online gatherings every week')}
               </span>
             </div>
           </div>
@@ -188,31 +196,31 @@ export default function Home() {
           style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,360px),1fr))' }}
         >
           <div className="reveal">
-            <span className="eyebrow">Welcome</span>
+            <span className="eyebrow">{t('home.welcome', 'Welcome')}</span>
             <h2
               className="mt-5"
               style={{ fontFamily: 'var(--serif)', fontSize: 'var(--t-h2)', letterSpacing: '-0.01em' }}
             >
-              A home for women who are ready to grow, serve and thrive.
+              {t('home.welcomeTitle', 'A home for women who are ready to grow, serve and thrive.')}
             </h2>
           </div>
           <div className="reveal d1">
             <p style={{ fontSize: 'var(--t-lead)', lineHeight: '1.6', color: 'var(--muted)' }}>
-              We are a community of women passionate about deepening our relationship with God and living out our faith with purpose and passion. Our ministry is built on the foundation of prayer, fellowship and empowerment — a place where women grow, serve and thrive together.
+              {t('home.welcomeText', 'We are a community of women passionate about deepening our relationship with God and living out our faith with purpose and passion. Our ministry is built on the foundation of prayer, fellowship and empowerment — a place where women grow, serve and thrive together.')}
             </p>
             <p
               className="flex flex-col leading-[1.2] mt-8"
               style={{ fontFamily: 'var(--serif)', fontSize: '26px', color: 'var(--ink)', fontWeight: '600' }}
             >
-              Lady Pastor Mrs Tracy Anyomi
+              {t('about.founderName', 'Lady Pastor Mrs Tracy Anyomi')}
               <span
                 className="font-sans text-[13px] tracking-[0.16em] uppercase font-bold mt-1"
                 style={{ color: 'var(--pink)' }}
               >
-                Founder &amp; Convener
+                {t('about.founderTitle', 'Founder & Convener')}
               </span>
             </p>
-            <Link to="/about" className="textlink mt-5 block">Read our story</Link>
+            <Link to="/about" className="textlink mt-5 block">{t('home.readStory', 'Read our story')}</Link>
           </div>
         </div>
       </section>
@@ -221,25 +229,25 @@ export default function Home() {
       <section className="section-rlr" style={{ background: 'var(--blush)' }}>
         <div className="container-rlr">
           <div className="max-w-[760px] mx-auto text-center mb-14 reveal">
-            <span className="eyebrow eyebrow-center">What we are built on</span>
-            <h2 className="section-head-h2">Three pillars hold us together</h2>
+            <span className="eyebrow eyebrow-center">{t('home.pillarsSub', 'What we are built on')}</span>
+            <h2 className="section-head-h2">{t('home.pillarsTitle', 'Three pillars hold us together')}</h2>
           </div>
           <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,280px),1fr))' }}>
             <PillarCard
               num="01"
-              title="Prayer"
-              desc="We cultivate a deeper prayer life — meeting God consistently and interceding for one another, our families and the nations."
+              title={t('home.pillar1Title', 'Prayer')}
+              desc={t('home.pillar1Desc', 'We cultivate a deeper prayer life — meeting God consistently and interceding for one another, our families and the nations.')}
             />
             <PillarCard
               num="02"
-              title="Fellowship"
-              desc="We foster meaningful relationships, gathering online three times a week to encourage, sharpen and walk with one another."
+              title={t('home.pillar2Title', 'Fellowship')}
+              desc={t('home.pillar2Desc', 'We foster meaningful relationships, gathering online three times a week to encourage, sharpen and walk with one another.')}
               delay="d1"
             />
             <PillarCard
               num="03"
-              title="Empowerment"
-              desc="We equip women to discover their purpose and unleash their potential to impact their communities and the world."
+              title={t('home.pillar3Title', 'Empowerment')}
+              desc={t('home.pillar3Desc', 'We equip women to discover their purpose and unleash their potential to impact their communities and the world.')}
               delay="d2"
             />
           </div>
@@ -261,20 +269,20 @@ export default function Home() {
             />
           </div>
           <div className="reveal d1">
-            <span className="eyebrow">Founder &amp; Convener</span>
+            <span className="eyebrow">{t('about.founderTitle', 'Founder & Convener')}</span>
             <blockquote
               className="display-text my-6"
               style={{ fontSize: 'clamp(26px,3vw,40px)', lineHeight: '1.22', fontStyle: 'italic', color: 'var(--ink)', margin: '24px 0 26px' }}
             >
-              "We are women on fire for Christ — raised to roar with a louder voice, reflecting God's glory and advancing His kingdom."
+              {t('about.founderQuote', '"We are women on fire for Christ — raised to roar with a louder voice, reflecting God\'s glory and advancing His kingdom."')}
             </blockquote>
             <p style={{ fontFamily: 'var(--serif)', fontSize: '24px', fontWeight: '600' }}>
-              Lady Pastor Mrs Tracy Anyomi
+              {t('about.founderName', 'Lady Pastor Mrs Tracy Anyomi')}
             </p>
             <p className="text-[15px] mb-5" style={{ color: 'var(--muted)' }}>
-              Founder &amp; Convener, Roar Ladies Roar Ministry
+              {t('home.founderSub', 'Founder & Convener, Roar Ladies Roar Ministry')}
             </p>
-            <Link to="/about" className="textlink">Meet our founder</Link>
+            <Link to="/about" className="textlink">{t('home.meetFounder', 'Meet our founder')}</Link>
           </div>
         </div>
       </section>
@@ -286,23 +294,23 @@ export default function Home() {
           style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,340px),1fr))' }}
         >
           <div className="reveal">
-            <span className="eyebrow eyebrow-rose">The Annual Encounter Conference</span>
+            <span className="eyebrow eyebrow-rose">{t('conference.heroSub', 'The Annual Encounter Conference')}</span>
             <h2
               className="display-text text-white mt-5 mb-6"
               style={{ fontSize: 'var(--t-h2)' }}
             >
-              A sacred space to encounter God's presence.
+              {t('conference.heroTitle', "A sacred space to encounter God's presence.")}
             </h2>
             <p className="lead-text mb-8" style={{ color: '#E7CFDE' }}>
-              Our annual gathering is designed for spiritual renewal — where women experience God, are equipped to live boldly, and are sent out to pursue their God-given purpose.
+              {t('conference.heroLead', 'Our annual gathering is designed for spiritual renewal — where women experience God, are equipped to live boldly, and are sent out to pursue their God-given purpose.')}
             </p>
-            <Link to="/conference" className="btn btn-primary btn-arrow">Explore the conference</Link>
+            <Link to="/conference" className="btn btn-primary btn-arrow">{t('home.exploreConference', 'Explore the conference')}</Link>
           </div>
           <ul className="flex flex-col list-none m-0 p-0 reveal d1">
             {[
-              ['Worship', 'Encounter His presence in deep, unhurried worship.'],
-              ['Teaching', 'Be equipped to live out your faith with boldness.'],
-              ['Fellowship', 'Build relationships that carry you through the year.'],
+              [t('conference.worshipTitle', 'Worship'), t('conference.worshipDesc', 'Encounter His presence in deep, unhurried worship.')],
+              [t('conference.teachingTitle', 'Teaching'), t('conference.teachingDesc', 'Be equipped to live out your faith with boldness.')],
+              [t('conference.fellowshipTitle', 'Fellowship'), t('conference.fellowshipDesc', 'Build relationships that carry you through the year.')],
             ].map(([title, desc]) => (
               <li key={title} className="conf-point">
                 <span className="conf-point-title">{title}</span>
@@ -317,20 +325,20 @@ export default function Home() {
       <section className="section-rlr">
         <div className="container-rlr">
           <div className="max-w-[760px] mb-11 reveal">
-            <span className="eyebrow">Gather with us online</span>
-            <h2 className="section-head-h2">We meet three times a week, 9:00 PM</h2>
+            <span className="eyebrow">{t('home.gatherOnline', 'Gather with us online')}</span>
+            <h2 className="section-head-h2">{t('home.gatherTitle', 'We meet three times a week, 9:00 PM')}</h2>
           </div>
           <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,240px),1fr))' }}>
-            <SchedCard day="Tuesday" time="9:00 PM" desc="Midweek prayer &amp; word" />
-            <SchedCard day="Thursday" time="9:00 PM" desc="Fellowship &amp; encouragement" delay="d1" />
-            <SchedCard day="Sunday" time="9:00 PM" desc="Worship &amp; teaching" delay="d2" />
+            <SchedCard day={t('common.tuesday', 'Tuesday')} time={t('home.tuesdayTime', '9:00 PM')} desc={t('announcement.tuesday', 'Midweek prayer & word')} />
+            <SchedCard day={t('common.thursday', 'Thursday')} time={t('home.thursdayTime', '9:00 PM')} desc={t('announcement.thursday', 'Fellowship & encouragement')} delay="d1" />
+            <SchedCard day={t('common.sunday', 'Sunday')} time={t('home.sundayTime', '9:00 PM')} desc={t('announcement.sunday', 'Worship & teaching')} delay="d2" />
           </div>
           <p
             className="mt-9 flex flex-wrap items-center gap-3 reveal d2"
             style={{ fontSize: 'var(--t-lead)', color: 'var(--muted)' }}
           >
-            All gatherings are online and open to women everywhere.{' '}
-            <Link to="/connect" className="textlink">Get the meeting link</Link>
+            {t('home.gatheringsFooterText', 'All gatherings are online and open to women everywhere.')}{' '}
+            <Link to="/connect" className="textlink">{t('footer.getLink', 'Get the meeting link')}</Link>
           </p>
         </div>
       </section>
@@ -339,8 +347,8 @@ export default function Home() {
       <section className="section-rlr" style={{ background: 'var(--blush)' }}>
         <div className="container-rlr">
           <div className="max-w-[760px] mx-auto text-center mb-12 reveal">
-            <span className="eyebrow eyebrow-center">Voices from the community</span>
-            <h2 className="section-head-h2">Lives being transformed</h2>
+            <span className="eyebrow eyebrow-center">{t('home.testimonialsSub', 'Voices from the community')}</span>
+            <h2 className="section-head-h2">{t('home.testimonialsTitle', 'Lives being transformed')}</h2>
           </div>
 
           <div className="carousel-container reveal">
@@ -351,9 +359,9 @@ export default function Home() {
               {testimonies.map((testi, i) => (
                 <div key={i} className="carousel-slide px-4">
                   <TestiCard
-                    quote={testi.quote}
+                    quote={t(testi.quoteKey, testi.defaultQuote)}
                     name={testi.name}
-                    location={testi.location}
+                    location={t(testi.locationKey, testi.defaultLocation)}
                     image={testi.image}
                   />
                 </div>
@@ -396,10 +404,10 @@ export default function Home() {
         <div className="container-rlr">
           <div className="flex justify-between items-end gap-6 flex-wrap mb-9 reveal">
             <div>
-              <span className="eyebrow">Moments together</span>
-              <h2 className="section-head-h2">Our community in worship</h2>
+              <span className="eyebrow">{t('home.momentsTogether', 'Moments together')}</span>
+              <h2 className="section-head-h2">{t('home.galleryTitle', 'Our community in worship')}</h2>
             </div>
-            <Link to="/connect" className="textlink">See the gallery</Link>
+            <Link to="/connect" className="textlink">{t('home.seeGallery', 'See the gallery')}</Link>
           </div>
           <div className="gallery-strip reveal d1">
             {[
@@ -423,19 +431,19 @@ export default function Home() {
       {/* ===== JOIN CTA ===== */}
       <section className="section-rlr text-center">
         <div className="narrow-rlr reveal">
-          <span className="eyebrow eyebrow-center">Your place is waiting</span>
+          <span className="eyebrow eyebrow-center">{t('home.joinCtaSub', 'Your place is waiting')}</span>
           <h2
             className="display-text my-5"
             style={{ fontSize: 'var(--t-h1)' }}
           >
-            Come and roar with us.
+            {t('home.joinCtaTitle', 'Come and roar with us.')}
           </h2>
           <p className="lead-text mx-auto" style={{ maxWidth: '580px' }}>
-            Whether you're seeking community, growth or purpose — there is room for you here. Join a gathering this week.
+            {t('home.joinCtaDesc', "Whether you're seeking community, growth or purpose — there is room for you here. Join a gathering this week.")}
           </p>
           <div className="flex flex-wrap gap-4 mt-9 justify-center">
-            <Link to="/connect" className="btn btn-primary btn-arrow">Join the community</Link>
-            <Link to="/give" className="btn btn-ghost">Partner with us</Link>
+            <Link to="/connect" className="btn btn-primary btn-arrow">{t('about.ctaButton1', 'Join the community')}</Link>
+            <Link to="/give" className="btn btn-ghost">{t('home.partnerWithUs', 'Partner with us')}</Link>
           </div>
         </div>
       </section>

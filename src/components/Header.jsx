@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const navItems = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Conference', to: '/conference' },
-  { label: 'Connect', to: '/connect' },
-  { label: 'Give', to: '/give' },
+  { labelKey: 'nav.home', to: '/' },
+  { labelKey: 'nav.about', to: '/about' },
+  { labelKey: 'nav.conference', to: '/conference' },
+  { labelKey: 'nav.connect', to: '/connect' },
+  { labelKey: 'nav.give', to: '/give' },
 ]
 
 export default function Header() {
+  const { t, i18n } = useTranslation()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [dark, setDark] = useState(
@@ -17,7 +19,6 @@ export default function Header() {
     (localStorage.getItem('theme') === null && window.matchMedia('(prefers-color-scheme: dark)').matches)
   )
   const [langMenuOpen, setLangMenuOpen] = useState(false)
-  const [currentLang, setCurrentLang] = useState('EN')
 
   const languages = [
     { code: 'en', label: 'English', flag: '🇬🇧' },
@@ -28,28 +29,11 @@ export default function Header() {
     { code: 'it', label: 'Italiano', flag: '🇮🇹' },
   ]
 
-  const changeLanguage = (code) => {
-    console.log('[Translation] Attempting to change language to:', code)
-    const selectEl = document.querySelector('select.goog-te-combo')
-    
-    const found = languages.find(l => l.code === code)
-    if (found) {
-      setCurrentLang(found.code.toUpperCase())
-    }
+  const currentLang = (i18n.resolvedLanguage || i18n.language || 'en').substring(0, 2).toUpperCase()
 
-    if (selectEl) {
-      console.log('[Translation] Found goog-te-combo. Setting value and dispatching change event.')
-      selectEl.value = code
-      selectEl.dispatchEvent(new Event('change'))
-    } else {
-      console.warn('[Translation] select.goog-te-combo not found in DOM.')
-      console.log('[Translation] window.google:', window.google)
-      console.log('[Translation] #google_translate_element:', document.getElementById('google_translate_element'))
-      
-      // Fallback: Set the google translate cookie manually so it translates when ready or on reload
-      document.cookie = `googtrans=/en/${code}; path=/;`
-      // Also write to session storage or reload if needed, but cookie is usually enough for google translate
-    }
+  const changeLanguage = (code) => {
+    console.log('[Translation] Changing language to:', code)
+    i18n.changeLanguage(code)
     setLangMenuOpen(false)
   }
 
@@ -75,25 +59,6 @@ export default function Header() {
     window.addEventListener('click', handleOutsideClick)
     return () => window.removeEventListener('click', handleOutsideClick)
   }, [langMenuOpen])
-
-  useEffect(() => {
-    const getCookie = (name) => {
-      const value = `; ${document.cookie}`
-      const parts = value.split(`; ${name}=`)
-      if (parts.length === 2) return parts.pop().split(';').shift()
-    }
-    // Check initial language cookie
-    const timer = setTimeout(() => {
-      const googtrans = getCookie('googtrans')
-      if (googtrans) {
-        const lang = googtrans.split('/').pop()
-        if (lang) {
-          setCurrentLang(lang.toUpperCase())
-        }
-      }
-    }, 1000)
-    return () => clearTimeout(timer)
-  }, [])
 
   const closeMenu = () => setMenuOpen(false)
 
@@ -126,7 +91,7 @@ export default function Header() {
               Roar Ladies Roar
             </b>
             <small className="text-[10.5px] tracking-[0.34em] uppercase font-semibold" style={{ color: 'var(--muted)' }}>
-              Ministry
+              {t('nav.ministry', 'Ministry')}
             </small>
           </span>
         </Link>
@@ -134,7 +99,7 @@ export default function Header() {
         {/* Desktop nav */}
         <nav className="hidden md:block">
           <ul className="flex items-center gap-1 list-none m-0 p-0">
-            {navItems.map(({ label, to }) => (
+            {navItems.map(({ labelKey, to }) => (
               <li key={to}>
                 <NavLink
                   to={to}
@@ -148,7 +113,7 @@ export default function Header() {
                   }
                   style={{ color: 'var(--ink)' }}
                 >
-                  {label}
+                  {t(labelKey)}
                 </NavLink>
               </li>
             ))}
@@ -234,7 +199,7 @@ export default function Header() {
             )}
           </button>
           <Link to="/connect" className="btn btn-primary btn-sm hidden md:inline-flex">
-            Join us
+            {t('common.joinUs')}
           </Link>
           <button
             id="nav-toggle-btn"
@@ -269,7 +234,7 @@ export default function Header() {
         }}
       >
         <ul className="flex flex-col gap-1 list-none m-0 p-0">
-          {navItems.map(({ label, to }) => (
+          {navItems.map(({ labelKey, to }) => (
             <li key={to}>
               <NavLink
                 to={to}
@@ -282,7 +247,7 @@ export default function Header() {
                 }
                 style={{ color: 'var(--ink)' }}
               >
-                {label}
+                {t(labelKey)}
               </NavLink>
             </li>
           ))}
@@ -292,7 +257,7 @@ export default function Header() {
           onClick={closeMenu}
           className="btn btn-primary mt-4 w-full"
         >
-          Join us
+          {t('common.joinUs')}
         </Link>
       </div>
     </header>

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import useReveal from '../hooks/useReveal'
 
 const meetings = [
-  { day: 'Tuesday', time: '9:00 PM', desc: 'Midweek prayer & word' },
-  { day: 'Thursday', time: '9:00 PM', desc: 'Fellowship & encouragement' },
-  { day: 'Sunday', time: '9:00 PM', desc: 'Worship & teaching' },
+  { dayKey: 'common.tuesday', defaultDay: 'Tuesday', timeKey: 'connect.tuesdayTime', defaultTime: '9:00 PM', descKey: 'announcement.tuesday', defaultDesc: 'Midweek prayer & word' },
+  { dayKey: 'common.thursday', defaultDay: 'Thursday', timeKey: 'connect.thursdayTime', defaultTime: '9:00 PM', descKey: 'announcement.thursday', defaultDesc: 'Fellowship & encouragement' },
+  { dayKey: 'common.sunday', defaultDay: 'Sunday', timeKey: 'connect.sundayTime', defaultTime: '9:00 PM', descKey: 'announcement.sunday', defaultDesc: 'Worship & teaching' },
 ]
 
 const galleryItems = [
@@ -18,12 +19,26 @@ const galleryItems = [
 
 export default function Connect() {
   useReveal()
+  const { t } = useTranslation()
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setSubmitted(true)
+  }
+
+  // Helper for translating categories dynamically
+  const getCategoryLabel = (cat) => {
+    switch (cat) {
+      case 'General': return t('connect.catGeneral', 'General')
+      case 'Family': return t('connect.catFamily', 'Family')
+      case 'Healing & Health': return t('connect.catHealing', 'Healing & Health')
+      case 'Career & Purpose': return t('connect.catCareer', 'Career & Purpose')
+      case 'Faith & Growth': return t('connect.catFaith', 'Faith & Growth')
+      case 'Marriage & Relationships': return t('connect.catMarriage', 'Marriage & Relationships')
+      default: return cat
+    }
   }
 
   // Prayer Wall States & Logic
@@ -123,16 +138,15 @@ export default function Connect() {
       {/* Page hero */}
       <section className="section-rlr" style={{ background: 'var(--blush)', paddingBottom: 'clamp(48px,6vw,80px)' }}>
         <div className="container-rlr" style={{ maxWidth: '760px' }}>
-          <span className="eyebrow reveal">Connect</span>
+          <span className="eyebrow reveal">{t('nav.connect', 'Connect')}</span>
           <h1
             className="display-text mt-5 reveal d1"
             style={{ fontSize: 'var(--t-h1)', color: 'var(--ink)' }}
           >
-            Join a gathering.<br />
-            <span style={{ color: 'var(--pink)', fontStyle: 'italic' }}>Find your place.</span>
+            {t('connect.heroTitle', 'Join a gathering. Find your place.')}
           </h1>
           <p className="lead-text mt-6 reveal d2">
-            Our online meetings are free, open to all women, and full of the presence of God. Find a time that works for you and show up — you will not be the same.
+            {t('connect.heroLead', 'Our online meetings are free, open to all women, and full of the presence of God. Find a time that works for you and show up — you will not be the same.')}
           </p>
         </div>
       </section>
@@ -141,21 +155,21 @@ export default function Connect() {
       <section className="section-rlr">
         <div className="container-rlr">
           <div className="max-w-[760px] mb-11 reveal">
-            <span className="eyebrow">Our Meetings</span>
-            <h2 className="section-head-h2">We meet online three times a week</h2>
+            <span className="eyebrow">{t('connect.meetingsTitle', 'Our Meetings')}</span>
+            <h2 className="section-head-h2">{t('connect.meetingsSub', 'We meet online three times a week')}</h2>
           </div>
           <div
             className="grid gap-6 mb-10"
             style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,240px),1fr))' }}
           >
-            {meetings.map(({ day, time, desc }, i) => (
+            {meetings.map(({ dayKey, defaultDay, timeKey, defaultTime, descKey, defaultDesc }, i) => (
               <div
-                key={day}
+                key={dayKey}
                 className={`sched-card reveal ${['', 'd1', 'd2'][i]}`}
               >
-                <span className="sched-day">{day}</span>
-                <span className="sched-time">{time}</span>
-                <span style={{ color: 'var(--muted)', fontSize: '15px', marginTop: '6px' }}>{desc}</span>
+                <span className="sched-day">{t(dayKey, defaultDay)}</span>
+                <span className="sched-time">{t(timeKey, defaultTime)}</span>
+                <span style={{ color: 'var(--muted)', fontSize: '15px', marginTop: '6px' }}>{t(descKey, defaultDesc)}</span>
               </div>
             ))}
           </div>
@@ -164,9 +178,9 @@ export default function Connect() {
             style={{ background: 'var(--blush)' }}
           >
             <div>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: 'var(--t-h3)' }}>Get the meeting link</h3>
+              <h3 style={{ fontFamily: 'var(--serif)', fontSize: 'var(--t-h3)' }}>{t('connect.getLinkTitle', 'Get the meeting link')}</h3>
               <p className="mt-2" style={{ color: 'var(--muted)', fontSize: '16px' }}>
-                Fill in the form below or reach us via WhatsApp to receive the link.
+                {t('connect.getLinkDesc', 'Fill in the form below or reach us via WhatsApp to receive the link.')}
               </p>
             </div>
             <a
@@ -175,7 +189,7 @@ export default function Connect() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              WhatsApp us
+              {t('common.whatsappUs', 'WhatsApp us')}
             </a>
           </div>
         </div>
@@ -189,8 +203,8 @@ export default function Connect() {
         >
           {/* Form */}
           <div className="reveal">
-            <span className="eyebrow">Send a message</span>
-            <h2 className="section-head-h2 mt-4">We'd love to hear from you</h2>
+            <span className="eyebrow">{t('connect.messageTitle', 'Send a message')}</span>
+            <h2 className="section-head-h2 mt-4">{t('connect.messageSub', "We'd love to hear from you")}</h2>
 
             {submitted ? (
               <div
@@ -198,10 +212,10 @@ export default function Connect() {
                 style={{ background: '#fff', border: '1px solid var(--line)' }}
               >
                 <p style={{ fontFamily: 'var(--serif)', fontSize: '28px', color: 'var(--ink)', fontWeight: '600' }}>
-                  Message received! 🙏
+                  {t('connect.messageSuccess', 'Message received! 🙏')}
                 </p>
                 <p className="mt-3" style={{ color: 'var(--muted)' }}>
-                  Thank you for reaching out. We'll be in touch shortly.
+                  {t('connect.messageSuccessDesc', "Thank you for reaching out. We'll be in touch shortly.")}
                 </p>
               </div>
             ) : (
@@ -210,9 +224,9 @@ export default function Connect() {
                 className="mt-8 flex flex-col gap-5"
               >
                 {[
-                  { id: 'name', label: 'Full name', type: 'text', placeholder: 'Your name' },
-                  { id: 'email', label: 'Email address', type: 'email', placeholder: 'your@email.com' },
-                  { id: 'phone', label: 'Phone / WhatsApp', type: 'tel', placeholder: '+233 000 000 000' },
+                  { id: 'name', label: t('connect.fullName', 'Full name'), type: 'text', placeholder: t('connect.fullName', 'Full name') },
+                  { id: 'email', label: t('connect.email', 'Email address'), type: 'email', placeholder: 'your@email.com' },
+                  { id: 'phone', label: t('connect.phone', 'Phone / WhatsApp'), type: 'tel', placeholder: '+233 000 000 000' },
                 ].map(({ id, label, type, placeholder }) => (
                   <div key={id} className="flex flex-col gap-2">
                     <label
@@ -247,12 +261,12 @@ export default function Connect() {
                     className="text-[13px] font-bold tracking-[0.1em] uppercase"
                     style={{ color: 'var(--ink)' }}
                   >
-                    Message
+                    {t('connect.message', 'Message')}
                   </label>
                   <textarea
                     id="message"
                     rows={4}
-                    placeholder="How can we help you?"
+                    placeholder={t('connect.messagePlaceholder', 'How can we help you?')}
                     value={form.message}
                     onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
                     className="w-full px-5 py-4 rounded-[14px] text-[16px] outline-none transition-all duration-200 resize-none"
@@ -267,7 +281,7 @@ export default function Connect() {
                   />
                 </div>
                 <button type="submit" className="btn btn-primary btn-arrow self-start mt-2">
-                  Send message
+                  {t('connect.sendMessage', 'Send message')}
                 </button>
               </form>
             )}
@@ -275,12 +289,12 @@ export default function Connect() {
 
           {/* Contact details */}
           <div className="reveal d1">
-            <span className="eyebrow">Contact details</span>
-            <h2 className="section-head-h2 mt-4">Reach us directly</h2>
+            <span className="eyebrow">{t('connect.contactTitle', 'Contact details')}</span>
+            <h2 className="section-head-h2 mt-4">{t('connect.reachDirectly', 'Reach us directly')}</h2>
             <div className="flex flex-col gap-6 mt-8">
               {[
-                { label: 'Phone', value: '0548 383 543', href: 'tel:0548383543' },
-                { label: 'WhatsApp', value: '0570 116 830', href: 'https://wa.me/233570116830' },
+                { label: t('footer.call', 'Call'), value: '0548 383 543', href: 'tel:0548383543' },
+                { label: t('footer.whatsapp', 'WhatsApp'), value: '0570 116 830', href: 'https://wa.me/233570116830' },
                 { label: 'Instagram / Facebook / YouTube', value: '@Roar ladies Roar', href: '#' },
                 { label: 'TikTok', value: '@Roar_ladies Roar', href: '#' },
               ].map(({ label, value, href }) => (
@@ -309,10 +323,10 @@ export default function Connect() {
       <section className="section-rlr" id="prayer-wall" style={{ borderTop: '1px solid var(--line)', background: 'var(--paper)' }}>
         <div className="container-rlr">
           <div className="max-w-[760px] mb-12 reveal">
-            <span className="eyebrow">RLR Prayer Wall</span>
-            <h2 className="section-head-h2">Stand in prayer with your sisters</h2>
+            <span className="eyebrow">{t('connect.prayerWallTitle', 'RLR Prayer Wall')}</span>
+            <h2 className="section-head-h2">{t('connect.prayerWallSub', 'Stand in prayer with your sisters')}</h2>
             <p className="lead-text mt-4">
-              "For where two or three gather in my name, there am I with them." — Matthew 18:20. Submit your request or lift up a sister in prayer today.
+              {t('connect.prayerWallLead', '"For where two or three gather in my name, there am I with them." — Matthew 18:20. Submit your request or lift up a sister in prayer today.')}
             </p>
           </div>
 
@@ -322,24 +336,24 @@ export default function Connect() {
           >
             {/* Submit Form */}
             <div className="card-rlr reveal" style={{ position: 'sticky', top: '100px' }}>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: 'var(--t-h3)', marginTop: 0 }}>Submit Request</h3>
+              <h3 style={{ fontFamily: 'var(--serif)', fontSize: 'var(--t-h3)', marginTop: 0 }}>{t('connect.submitRequest', 'Submit Request')}</h3>
               <p className="mb-6 mt-2 text-[14px]" style={{ color: 'var(--muted)' }}>
-                Your request will be posted on the wall. You can post anonymously.
+                {t('connect.submitRequestDesc', 'Your request will be posted on the wall. You can post anonymously.')}
               </p>
 
               {prayerSubmitted ? (
                 <div className="py-8 text-center bg-[color:var(--blush)] rounded-[14px] border border-[color:var(--line)]">
-                  <p className="text-[20px] font-bold" style={{ color: 'var(--pink)' }}>Request Posted! 🙏</p>
-                  <p className="text-[14px] mt-2 text-gray-600">Sisters are standing in prayer with you.</p>
+                  <p className="text-[20px] font-bold" style={{ color: 'var(--pink)' }}>{t('connect.postedSuccess', 'Request Posted! 🙏')}</p>
+                  <p className="text-[14px] mt-2 text-gray-600">{t('connect.postedSuccessDesc', 'Sisters are standing in prayer with you.')}</p>
                 </div>
               ) : (
                 <form onSubmit={handlePrayerSubmit} className="flex flex-col gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="p-name" className="text-[12px] font-bold uppercase tracking-wider" style={{ color: 'var(--ink)' }}>Name (Optional)</label>
+                    <label htmlFor="p-name" className="text-[12px] font-bold uppercase tracking-wider" style={{ color: 'var(--ink)' }}>{t('connect.nameOptional', 'Name (Optional)')}</label>
                     <input
                       id="p-name"
                       type="text"
-                      placeholder="e.g. Grace or Leave blank for Anonymous"
+                      placeholder="e.g. Grace"
                       value={prayerForm.name}
                       onChange={(e) => setPrayerForm(f => ({ ...f, name: e.target.value }))}
                       className="w-full px-4 py-3 rounded-[11px] outline-none"
@@ -348,7 +362,7 @@ export default function Connect() {
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="p-cat" className="text-[12px] font-bold uppercase tracking-wider" style={{ color: 'var(--ink)' }}>Category</label>
+                    <label htmlFor="p-cat" className="text-[12px] font-bold uppercase tracking-wider" style={{ color: 'var(--ink)' }}>{t('connect.category', 'Category')}</label>
                     <select
                       id="p-cat"
                       value={prayerForm.category}
@@ -357,18 +371,18 @@ export default function Connect() {
                       style={{ border: '1.5px solid var(--line)', background: '#fff', fontSize: '15px' }}
                     >
                       {['General', 'Family', 'Healing & Health', 'Career & Purpose', 'Faith & Growth', 'Marriage & Relationships'].map(cat => (
-                        <option key={cat} value={cat}>{cat}</option>
+                        <option key={cat} value={cat}>{getCategoryLabel(cat)}</option>
                       ))}
                     </select>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="p-text" className="text-[12px] font-bold uppercase tracking-wider" style={{ color: 'var(--ink)' }}>Prayer Request</label>
+                    <label htmlFor="p-text" className="text-[12px] font-bold uppercase tracking-wider" style={{ color: 'var(--ink)' }}>{t('connect.prayerRequest', 'Prayer Request')}</label>
                     <textarea
                       id="p-text"
                       rows={4}
                       required
-                      placeholder="What are you trusting God for?"
+                      placeholder={t('connect.prayerPlaceholder', 'What are you trusting God for?')}
                       value={prayerForm.text}
                       onChange={(e) => setPrayerForm(f => ({ ...f, text: e.target.value }))}
                       className="w-full px-4 py-3 rounded-[11px] outline-none resize-none"
@@ -377,7 +391,7 @@ export default function Connect() {
                   </div>
 
                   <button type="submit" className="btn btn-primary mt-2 justify-center w-full">
-                    Post Prayer Request
+                    {t('connect.postRequest', 'Post Prayer Request')}
                   </button>
                 </form>
               )}
@@ -400,7 +414,7 @@ export default function Connect() {
                       fontSize: '12.5px'
                     }}
                   >
-                    {cat}
+                    {cat === 'All' ? t('connect.filterAll', 'All') : getCategoryLabel(cat)}
                   </button>
                 ))}
               </div>
@@ -423,17 +437,17 @@ export default function Connect() {
                       <div className="flex justify-between items-start gap-4 flex-wrap mb-4">
                         <div className="flex items-center gap-2">
                           <span className="font-serif font-bold text-[18px]" style={{ color: 'var(--ink)' }}>
-                            {p.name}
+                            {p.name === 'Anonymous' ? t('connect.anonymous', 'Anonymous') : p.name}
                           </span>
                           <span className="text-[13px]" style={{ color: 'var(--muted)' }}>
-                            • {p.time}
+                            • {p.time === 'Just now' ? t('connect.justNow', 'Just now') : p.time}
                           </span>
                         </div>
                         <span 
                           className="pill text-[11px]" 
                           style={{ background: 'var(--blush)', color: 'var(--magenta)', padding: '4px 10px' }}
                         >
-                          {p.category}
+                          {getCategoryLabel(p.category)}
                         </span>
                       </div>
                       
@@ -443,7 +457,7 @@ export default function Connect() {
 
                       <div className="flex items-center justify-between border-t pt-4" style={{ borderColor: 'var(--line)' }}>
                         <span className="text-[13px] font-semibold" style={{ color: 'var(--muted)' }}>
-                          🙏 {p.count} sisters prayed
+                          {t('connect.sistersPrayed', '{{count}} sisters prayed', { count: p.count })}
                         </span>
                         
                         <button
@@ -457,7 +471,7 @@ export default function Connect() {
                             position: 'relative'
                           }}
                         >
-                          {myPrayed[p.id] ? '❤️ Stood in Prayer' : '🙏 Stand in Prayer'}
+                          {myPrayed[p.id] ? t('connect.stoodInPrayer', '❤️ Stood in Prayer') : t('connect.standInPrayer', '🙏 Stand in Prayer')}
                           
                           {/* Floating hearts */}
                           {flyingHearts.map(heart => (
@@ -488,19 +502,19 @@ export default function Connect() {
         <div className="container-rlr">
           <div className="flex justify-between items-end gap-6 flex-wrap mb-9 reveal">
             <div>
-              <span className="eyebrow">Community gallery</span>
-              <h2 className="section-head-h2">Moments of grace</h2>
+              <span className="eyebrow">{t('connect.galleryTitle', 'Community gallery')}</span>
+              <h2 className="section-head-h2">{t('connect.gallerySub', 'Moments of grace')}</h2>
             </div>
           </div>
           <div
             className="grid gap-4 reveal d1"
             style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(180px,1fr))' }}
           >
-            {galleryItems.map(({ src, alt }, i) => (
+            {galleryItems.map((item, i) => (
               <img
                 key={i}
-                src={src}
-                alt={alt}
+                src={item.src}
+                alt={item.alt}
                 className="w-full object-cover rounded-[14px]"
                 style={{ aspectRatio: '1/1' }}
               />

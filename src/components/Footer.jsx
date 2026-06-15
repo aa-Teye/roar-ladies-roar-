@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const socials = [
   { label: 'Instagram', abbr: 'IG', href: '#' },
@@ -8,6 +9,8 @@ const socials = [
 ]
 
 export default function Footer() {
+  const { t } = useTranslation()
+
   return (
     <footer style={{ background: 'var(--plum)', color: '#E7CFDE', paddingTop: 'clamp(60px,7vw,96px)', paddingBottom: '46px' }}>
       <div className="container-rlr">
@@ -25,11 +28,11 @@ export default function Footer() {
               />
               <span className="flex flex-col leading-tight">
                 <b className="font-extrabold text-[15px] tracking-[0.14em] uppercase text-white whitespace-nowrap">Roar Ladies Roar</b>
-                <small className="text-[10.5px] tracking-[0.34em] uppercase font-semibold text-white">Ministry</small>
+                <small className="text-[10.5px] tracking-[0.34em] uppercase font-semibold text-white">{t('nav.ministry', 'Ministry')}</small>
               </span>
             </Link>
             <p className="mt-5 max-w-[300px] text-[15px]" style={{ color: '#C9A9BD' }}>
-              A global community of prayerful, passionate, purpose-driven women — on fire for Christ.
+              {t('footer.desc', 'A global community of prayerful, passionate, purpose-driven women — on fire for Christ.')}
             </p>
             <div className="flex gap-2 mt-5">
               {socials.map(({ label, abbr, href }) => (
@@ -51,13 +54,13 @@ export default function Footer() {
               className="text-[12px] tracking-[0.2em] uppercase font-bold mb-5"
               style={{ color: 'var(--rose)' }}
             >
-              Explore
+              {t('footer.explore', 'Explore')}
             </h4>
             <ul className="flex flex-col gap-3 text-[15px] list-none m-0 p-0">
-              {[['About', '/about'], ['Conference', '/conference'], ['Connect', '/connect'], ['Give', '/give']].map(([label, to]) => (
+              {[['nav.about', '/about'], ['nav.conference', '/conference'], ['nav.connect', '/connect'], ['nav.give', '/give']].map(([key, to]) => (
                 <li key={to}>
                   <Link to={to} className="transition-colors duration-200 hover:text-white" style={{ color: '#E7CFDE' }}>
-                    {label}
+                    {t(key)}
                   </Link>
                 </li>
               ))}
@@ -70,15 +73,15 @@ export default function Footer() {
               className="text-[12px] tracking-[0.2em] uppercase font-bold mb-5"
               style={{ color: 'var(--rose)' }}
             >
-              Gather
+              {t('footer.gather', 'Gather')}
             </h4>
             <ul className="flex flex-col gap-3 text-[15px] list-none m-0 p-0" style={{ color: '#E7CFDE' }}>
-              <li>Tuesdays · 9 PM</li>
-              <li>Thursdays · 9 PM</li>
-              <li>Sundays · 9 PM</li>
+              <li>{t('footer.tuesdaysTime', 'Tuesdays · 9 PM')}</li>
+              <li>{t('footer.thursdaysTime', 'Thursdays · 9 PM')}</li>
+              <li>{t('footer.sundaysTime', 'Sundays · 9 PM')}</li>
               <li>
                 <Link to="/connect" className="transition-colors duration-200 hover:text-white" style={{ color: '#E7CFDE' }}>
-                  Get the link
+                  {t('footer.getLink', 'Get the link')}
                 </Link>
               </li>
             </ul>
@@ -90,17 +93,17 @@ export default function Footer() {
               className="text-[12px] tracking-[0.2em] uppercase font-bold mb-5"
               style={{ color: 'var(--rose)' }}
             >
-              Reach us
+              {t('footer.reachUs', 'Reach us')}
             </h4>
             <ul className="flex flex-col gap-3 text-[15px] list-none m-0 p-0" style={{ color: '#E7CFDE' }}>
               <li>
-                Call{' '}
+                {t('footer.call', 'Call')}{' '}
                 <a href="tel:0548383543" className="hover:text-white transition-colors duration-200">
                   0548 383 543
                 </a>
               </li>
               <li>
-                WhatsApp{' '}
+                {t('footer.whatsapp', 'WhatsApp')}{' '}
                 <a href="https://wa.me/233570116830" className="hover:text-white transition-colors duration-200">
                   0570 116 830
                 </a>
@@ -119,8 +122,8 @@ export default function Footer() {
             color: '#B892A8',
           }}
         >
-          <span>© 2026 Roar Ladies Roar Ministry. All rights reserved.</span>
-          <span>Ladies on Fire for Christ 🔥</span>
+          <span>{t('footer.copyright', '© 2026 Roar Ladies Roar Ministry. All rights reserved.')}</span>
+          <span>{t('footer.tagline', 'Ladies on Fire for Christ 🔥')}</span>
         </div>
       </div>
     </footer>

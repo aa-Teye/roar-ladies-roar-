@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export default function NewsTickerBar({ isInline, isSticky }) {
+  const { t } = useTranslation()
   const location = useLocation()
   const [style, setStyle] = useState({
     display: 'none'
   })
 
   const headlines = [
-    "Welcome to Roar Ladies Roar Ministry — Ladies on Fire for Christ!",
-    "Midweek Prayer & Word: Tuesdays at 9:00 PM GMT online",
-    "Fellowship & Encouragement: Thursdays at 9:00 PM GMT online",
-    "Worship & Teaching: Sundays at 9:00 PM GMT online",
-    "Encounter 2026 Conference: Registration is now open! Stand in prayer with over 150 sisters.",
-    "Submit your prayer requests or stand in prayer with others on our new interactive Prayer Wall!",
-    "Partner with us: Sow a seed on our Give page to support global outreach and leadership training."
+    t('ticker.headline1', "Welcome to Roar Ladies Roar Ministry — Ladies on Fire for Christ!"),
+    t('ticker.headline2', "Midweek Prayer & Word: Tuesdays at 9:00 PM GMT online"),
+    t('ticker.headline3', "Fellowship & Encouragement: Thursdays at 9:00 PM GMT online"),
+    t('ticker.headline4', "Worship & Teaching: Sundays at 9:00 PM GMT online"),
+    t('ticker.headline5', "Encounter 2026 Conference: Registration is now open! Stand in prayer with over 150 sisters."),
+    t('ticker.headline6', "Submit your prayer requests or stand in prayer with others on our new interactive Prayer Wall!"),
+    t('ticker.headline7', "Partner with us: Sow a seed on our Give page to support global outreach and leadership training.")
   ]
 
   useEffect(() => {
