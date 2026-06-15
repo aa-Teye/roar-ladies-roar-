@@ -146,9 +146,6 @@ export default function Header() {
 
         {/* CTA + hamburger */}
         <div className="flex items-center gap-3">
-          {/* Hidden Google Translate Component */}
-          <div id="google_translate_element" style={{ display: 'none' }}></div>
-
           {/* Custom Language Globe Dropdown */}
           <div className="relative">
             <button
