@@ -169,12 +169,13 @@ export default function Home() {
               style={{ aspectRatio: '4/5', boxShadow: 'var(--shadow-lg)', maxHeight: 'min(660px, 64vh)' }}
             />
             <div
-              className="absolute flex items-center gap-4 bg-white rounded-[18px]"
+              className="absolute flex items-center gap-4 rounded-[18px]"
               style={{
                 left: '-26px',
                 bottom: '38px',
                 padding: 'clamp(14px, 1.5vw, 22px) clamp(18px, 2vw, 26px)',
-                boxShadow: 'var(--shadow)'
+                boxShadow: 'var(--shadow)',
+                background: 'var(--white)'
               }}
             >
               <span className="font-serif font-bold leading-none" style={{ color: 'var(--pink)', fontFamily: 'var(--serif)', fontSize: 'clamp(38px, 3.2vw, 46px)' }}>3×</span>
