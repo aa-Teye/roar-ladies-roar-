@@ -209,7 +209,7 @@ export default function Connect() {
             {submitted ? (
               <div
                 className="mt-8 p-8 rounded-[26px] text-center"
-                style={{ background: '#fff', border: '1px solid var(--line)' }}
+                style={{ background: 'var(--white)', border: '1px solid var(--line)' }}
               >
                 <p style={{ fontFamily: 'var(--serif)', fontSize: '28px', color: 'var(--ink)', fontWeight: '600' }}>
                   {t('connect.messageSuccess', 'Message received! 🙏')}
@@ -245,7 +245,7 @@ export default function Connect() {
                       onChange={(e) => setForm((f) => ({ ...f, [id]: e.target.value }))}
                       className="w-full px-5 py-4 rounded-[14px] text-[16px] outline-none transition-all duration-200"
                       style={{
-                        background: '#fff',
+                        background: 'var(--white)',
                         border: '1.5px solid var(--line)',
                         color: 'var(--ink)',
                         fontFamily: 'var(--sans)',
@@ -271,7 +271,7 @@ export default function Connect() {
                     onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
                     className="w-full px-5 py-4 rounded-[14px] text-[16px] outline-none transition-all duration-200 resize-none"
                     style={{
-                      background: '#fff',
+                      background: 'var(--white)',
                       border: '1.5px solid var(--line)',
                       color: 'var(--ink)',
                       fontFamily: 'var(--sans)',
@@ -357,7 +357,7 @@ export default function Connect() {
                       value={prayerForm.name}
                       onChange={(e) => setPrayerForm(f => ({ ...f, name: e.target.value }))}
                       className="w-full px-4 py-3 rounded-[11px] outline-none"
-                      style={{ border: '1.5px solid var(--line)', background: '#fff', fontSize: '15px' }}
+                      style={{ border: '1.5px solid var(--line)', background: 'var(--white)', color: 'var(--ink)', fontSize: '15px' }}
                     />
                   </div>
 
@@ -368,7 +368,7 @@ export default function Connect() {
                       value={prayerForm.category}
                       onChange={(e) => setPrayerForm(f => ({ ...f, category: e.target.value }))}
                       className="w-full px-4 py-3 rounded-[11px] outline-none"
-                      style={{ border: '1.5px solid var(--line)', background: '#fff', fontSize: '15px' }}
+                      style={{ border: '1.5px solid var(--line)', background: 'var(--white)', color: 'var(--ink)', fontSize: '15px' }}
                     >
                       {['General', 'Family', 'Healing & Health', 'Career & Purpose', 'Faith & Growth', 'Marriage & Relationships'].map(cat => (
                         <option key={cat} value={cat}>{getCategoryLabel(cat)}</option>
@@ -386,7 +386,7 @@ export default function Connect() {
                       value={prayerForm.text}
                       onChange={(e) => setPrayerForm(f => ({ ...f, text: e.target.value }))}
                       className="w-full px-4 py-3 rounded-[11px] outline-none resize-none"
-                      style={{ border: '1.5px solid var(--line)', background: '#fff', fontSize: '15px' }}
+                      style={{ border: '1.5px solid var(--line)', background: 'var(--white)', color: 'var(--ink)', fontSize: '15px' }}
                     />
                   </div>
 
@@ -427,7 +427,7 @@ export default function Connect() {
                       key={p.id}
                       className="card-rlr"
                       style={{ 
-                        background: '#fff', 
+                        background: 'var(--white)', 
                         padding: '28px', 
                         position: 'relative',
                         overflow: 'hidden',

@@ -66,7 +66,7 @@ export default function Header() {
     <header
       className="sticky top-0 z-[60] border-b transition-shadow duration-300"
       style={{
-        background: 'rgba(254,252,253,0.82)',
+        background: 'var(--header-bg, rgba(254,252,253,0.82))',
         backdropFilter: 'saturate(160%) blur(14px)',
         borderColor: 'var(--line)',
         boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
